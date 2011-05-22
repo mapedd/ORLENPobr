@@ -11,25 +11,16 @@
 
 @interface MainViewController : UIViewController <FlipsideViewControllerDelegate, 
                                                     UINavigationControllerDelegate,
-                                                    UIImagePickerControllerDelegate> {
+                                                    UIImagePickerControllerDelegate,
+                                                    UIActionSheetDelegate> {
     
-    UIImageView *image1;
-    UIImageView *image2;
-    UIImage *maskImage;
-    IBOutlet UIButton *button;
-    BOOL firstSet;
-    BOOL secondSet;
-                                                        BOOL iphone4;
-    
-    UIImagePickerController *picker;
+    UIImageView *_image;
+    UIButton *_button;
+    UIImagePickerController *_picker;
 
 }
-@property(nonatomic, retain) IBOutlet UIImageView *image1;
-@property(nonatomic, retain) IBOutlet UIImageView *image2;
-@property(nonatomic, retain) UIImagePickerController *picker;
+@property (nonatomic, retain) IBOutlet UIImageView *image;
+@property (nonatomic, retain) IBOutlet UIButton *button;
+@property (nonatomic, retain) UIImagePickerController *picker;
 
-- (IBAction)showInfo:(id)sender;
-- (IBAction)grabImage;
-- (UIImage*)imageWithImage:(UIImage*)image 
-              scaledToSize:(CGSize)newSize; 
 @end

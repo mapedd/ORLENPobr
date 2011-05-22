@@ -11,10 +11,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import "OvalOverlayView.h"
 
-
-
-
-
 @interface UIImage (masking) 
 - (UIImage*) maskWithMask:(UIImage *)maskImage ;
 @end
@@ -39,57 +35,50 @@
 
 @end
 
+@interface MainViewController ()
+
+
+- (IBAction)showInfo:(id)sender;
+- (IBAction)grabImage;
+- (UIImage*)imageWithImage:(UIImage*)image 
+              scaledToSize:(CGSize)newSize; 
+
+@end
+
 @implementation MainViewController
 
-@synthesize image1, image2, picker;
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-*/
+@synthesize image = _image;
+@synthesize picker = _picker;
+@synthesize button = _button;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    NSLog(@"init");
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    firstSet = NO;
-    secondSet = NO;
-    NSBundle *bundle = [NSBundle mainBundle];
-    maskImage = [[UIImage alloc] initWithContentsOfFile:[bundle pathForResource:@"maskBig" ofType:@"png"]];
     return self;
 }
 
 - (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller
 {
     [self dismissModalViewControllerAnimated:YES];
-    image1.image = nil;
-    image2.image = nil;
-    firstSet = NO;
-    secondSet = NO;
-    [button setTitle:@"Grab two photos" forState:UIControlStateNormal];
+    self.image.image = nil;
+    [self.button setTitle:@"Pick a photo" forState:UIControlStateNormal];
 }
 
 - (IBAction)showInfo:(id)sender
 {    
-    if (image1.image != nil && image2.image != nil) {
+    if (self.image.image != nil) {
         FlipsideViewController *controller = [[FlipsideViewController alloc] initWithNibName:@"FlipsideView" bundle:nil];
         controller.delegate = self;
-        controller.workingImage1 = image2.image;
-        controller.workingImage2 = image1.image;
+        controller.workingImage1 = self.image.image;
         
         controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         [self presentModalViewController:controller animated:YES];
-        
         [controller release];
     }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations.
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -115,98 +104,71 @@
    
     [super viewDidLoad];
     
+    self.picker = [[[UIImagePickerController alloc] init] autorelease];
+    [self.picker setDelegate:self];
 
-    
-    
-    UIScreen *MainScreen = [UIScreen mainScreen];
-    UIScreenMode *ScreenMode = [MainScreen currentMode];
-    CGSize Size = [ScreenMode size];
-    if (Size.width>320) {
-        NSLog(@"ip4");
-        iphone4 = YES;
-    }
-    else    
-        iphone4 = NO;
-
-    
-    self.picker = [[UIImagePickerController alloc] init];
-    if ([UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera]) {
-        self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        if (iphone4) {
-            UIImageView *overlay = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mask6.png"]];
-            [overlay setFrame:CGRectMake(0, 0, 320, 480)];
-            self.picker.cameraOverlayView = overlay;
-            [overlay release];
-        }
-        else {
-            OvalOverlayView *oval = [[OvalOverlayView alloc] initWithFrame:CGRectMake(10,10, 100, 100)];
-            self.picker.cameraOverlayView = oval;
-            [oval release];
-        }
-    }
-    else{
-        self.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
-   
-    [picker setDelegate:self];
-
-    
-    
-    
-    image1.layer.borderWidth = 3.0f;
-    image1.layer.borderColor = [[UIColor whiteColor] CGColor];
-    image2.layer.borderWidth = 3.0f;
-    image2.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.image.layer.borderWidth = 3.0f;
+    self.image.layer.borderColor = [[UIColor whiteColor] CGColor];
     
 
 }
 
 - (void)dealloc
 {
-    [maskImage release];
-    [image1 release];
-    [image2 release];
-    [picker  release];
+    self.button = nil;
+    self.picker = nil;
+    self.image = nil;
     [super dealloc];
 }
 
 - (IBAction)grabImage {
-    if ([[[button titleLabel] text] isEqualToString:@"Substract and find the face"]) {
-        [self showInfo:nil];
+    if (self.image.image == nil) {
+        UIActionSheet *alertSheet;
+        
+        if ([UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera]) {
+            alertSheet = [[[UIActionSheet alloc] initWithTitle:@"Image Source"
+                                                      delegate:self
+                                             cancelButtonTitle:@"Cancel"
+                                        destructiveButtonTitle:nil
+                                             otherButtonTitles:@"Camera",@"Library", nil] autorelease];
+        }
+        else{
+            alertSheet = [[[UIActionSheet alloc] initWithTitle:@"Image Source"
+                                                      delegate:self
+                                             cancelButtonTitle:@"Cancel"
+                                        destructiveButtonTitle:nil
+                                             otherButtonTitles:@"Library", nil] autorelease];
+        }
+        
+        
+        [alertSheet showInView:self.view];
     }
     else{
-        [self presentModalViewController:self.picker animated:YES];
+        [self showInfo:nil];
     }
+
+    
+    
+    
 }
 
 #pragma - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    for (NSString *key in info) {
-       NSLog(@"key: %@, object: %@", key, [info objectForKey:key]);
-    }
+//    for (NSString *key in info) {
+//       NSLog(@"key: %@, object: %@", key, [info objectForKey:key]);
+//    }
     
     UIImage *photo;
     
     [self dismissModalViewControllerAnimated:YES];
     if ([info objectForKey:UIImagePickerControllerOriginalImage]) {
-        if (firstSet == NO) {
             photo = [info objectForKey:UIImagePickerControllerOriginalImage];
             
-            [self.image1 setImage:[self imageWithImage:photo scaledToSize:CGSizeMake(320, 480)]];
-//            [self.image1 setImage:photo];
-            firstSet = YES;
-            [button setTitle:@"Grab second image" forState:UIControlStateNormal];
+            [self.image setImage:[self imageWithImage:photo scaledToSize:CGSizeMake(320, 480)]];
 
-        }
-        else 
-        {
-            photo = [info objectForKey:UIImagePickerControllerOriginalImage];
-            secondSet  = YES;
-            [self.image2 setImage:[self imageWithImage:photo scaledToSize:CGSizeMake(320, 480)]];
-//            [self.image2 setImage:photo];
-            [button setTitle:@"Substract and find the face" forState:UIControlStateNormal];
-        }
+            [self.button setTitle:@"Find ORLEN" forState:UIControlStateNormal];
+
 
     }
     
@@ -226,6 +188,26 @@
     UIGraphicsEndImageContext();
     
     return newImage;
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    NSLog(@"index: %d", buttonIndex);
+    
+    if(actionSheet.numberOfButtons == 3){
+        if (buttonIndex == 0)
+            [self.picker setSourceType:UIImagePickerControllerSourceTypeCamera];
+        else  if(buttonIndex == 1)
+            [self.picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    }
+    else{
+        [self.picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    }
+    
+    [self presentModalViewController:self.picker animated:YES];
+
 }
 
 
