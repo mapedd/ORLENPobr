@@ -1,0 +1,460 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04965F5A1389A3A60032ADD8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04965F591389A3A60032ADD8 /* UIKit.framework */; };
+		04965F5C1389A3A60032ADD8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04965F5B1389A3A60032ADD8 /* Foundation.framework */; };
+		04965F5E1389A3A60032ADD8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04965F5D1389A3A60032ADD8 /* CoreGraphics.framework */; };
+		04965F641389A3A60032ADD8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04965F621389A3A60032ADD8 /* InfoPlist.strings */; };
+		04965F671389A3A70032ADD8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965F661389A3A70032ADD8 /* main.m */; };
+		04965F6A1389A3A70032ADD8 /* OrlenPOBRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965F691389A3A70032ADD8 /* OrlenPOBRAppDelegate.m */; };
+		04965F6D1389A3A70032ADD8 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04965F6B1389A3A70032ADD8 /* MainWindow.xib */; };
+		04965F701389A3A70032ADD8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965F6F1389A3A70032ADD8 /* MainViewController.m */; };
+		04965F721389A3A70032ADD8 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04965F711389A3A70032ADD8 /* MainView.xib */; };
+		04965F751389A3A70032ADD8 /* FlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965F741389A3A70032ADD8 /* FlipsideViewController.m */; };
+		04965F771389A3A70032ADD8 /* FlipsideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04965F761389A3A70032ADD8 /* FlipsideView.xib */; };
+		04965F7E1389A3A70032ADD8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04965F591389A3A60032ADD8 /* UIKit.framework */; };
+		04965F7F1389A3A70032ADD8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04965F5B1389A3A60032ADD8 /* Foundation.framework */; };
+		04965F801389A3A70032ADD8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04965F5D1389A3A60032ADD8 /* CoreGraphics.framework */; };
+		04965F881389A3A70032ADD8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04965F861389A3A70032ADD8 /* InfoPlist.strings */; };
+		04965F8B1389A3A70032ADD8 /* OrlenPOBRTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 04965F8A1389A3A70032ADD8 /* OrlenPOBRTests.h */; };
+		04965F8D1389A3A70032ADD8 /* OrlenPOBRTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965F8C1389A3A70032ADD8 /* OrlenPOBRTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		04965F811389A3A70032ADD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04965F4C1389A3A60032ADD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04965F541389A3A60032ADD8;
+			remoteInfo = OrlenPOBR;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		04965F551389A3A60032ADD8 /* OrlenPOBR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrlenPOBR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		04965F591389A3A60032ADD8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		04965F5B1389A3A60032ADD8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		04965F5D1389A3A60032ADD8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		04965F611389A3A60032ADD8 /* OrlenPOBR-Info.plist */ = {isa = PBXFileReference; path = "OrlenPOBR-Info.plist"; sourceTree = "<group>"; };
+		04965F631389A3A60032ADD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		04965F651389A3A60032ADD8 /* OrlenPOBR-Prefix.pch */ = {isa = PBXFileReference; path = "OrlenPOBR-Prefix.pch"; sourceTree = "<group>"; };
+		04965F661389A3A70032ADD8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		04965F681389A3A70032ADD8 /* OrlenPOBRAppDelegate.h */ = {isa = PBXFileReference; path = OrlenPOBRAppDelegate.h; sourceTree = "<group>"; };
+		04965F691389A3A70032ADD8 /* OrlenPOBRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrlenPOBRAppDelegate.m; sourceTree = "<group>"; };
+		04965F6C1389A3A70032ADD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		04965F6E1389A3A70032ADD8 /* MainViewController.h */ = {isa = PBXFileReference; path = MainViewController.h; sourceTree = "<group>"; };
+		04965F6F1389A3A70032ADD8 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		04965F711389A3A70032ADD8 /* MainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
+		04965F731389A3A70032ADD8 /* FlipsideViewController.h */ = {isa = PBXFileReference; path = FlipsideViewController.h; sourceTree = "<group>"; };
+		04965F741389A3A70032ADD8 /* FlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlipsideViewController.m; sourceTree = "<group>"; };
+		04965F761389A3A70032ADD8 /* FlipsideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FlipsideView.xib; sourceTree = "<group>"; };
+		04965F7D1389A3A70032ADD8 /* OrlenPOBRTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrlenPOBRTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04965F851389A3A70032ADD8 /* OrlenPOBRTests-Info.plist */ = {isa = PBXFileReference; path = "OrlenPOBRTests-Info.plist"; sourceTree = "<group>"; };
+		04965F871389A3A70032ADD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		04965F891389A3A70032ADD8 /* OrlenPOBRTests-Prefix.pch */ = {isa = PBXFileReference; path = "OrlenPOBRTests-Prefix.pch"; sourceTree = "<group>"; };
+		04965F8A1389A3A70032ADD8 /* OrlenPOBRTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrlenPOBRTests.h; sourceTree = "<group>"; };
+		04965F8C1389A3A70032ADD8 /* OrlenPOBRTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrlenPOBRTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04965F521389A3A60032ADD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04965F5A1389A3A60032ADD8 /* UIKit.framework in Frameworks */,
+				04965F5C1389A3A60032ADD8 /* Foundation.framework in Frameworks */,
+				04965F5E1389A3A60032ADD8 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04965F791389A3A70032ADD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04965F7E1389A3A70032ADD8 /* UIKit.framework in Frameworks */,
+				04965F7F1389A3A70032ADD8 /* Foundation.framework in Frameworks */,
+				04965F801389A3A70032ADD8 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04965F4A1389A3A60032ADD8 = {
+			isa = PBXGroup;
+			children = (
+				04965F5F1389A3A60032ADD8 /* OrlenPOBR */,
+				04965F831389A3A70032ADD8 /* OrlenPOBRTests */,
+				04965F581389A3A60032ADD8 /* Frameworks */,
+				04965F561389A3A60032ADD8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		04965F561389A3A60032ADD8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04965F551389A3A60032ADD8 /* OrlenPOBR.app */,
+				04965F7D1389A3A70032ADD8 /* OrlenPOBRTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		04965F581389A3A60032ADD8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				04965F591389A3A60032ADD8 /* UIKit.framework */,
+				04965F5B1389A3A60032ADD8 /* Foundation.framework */,
+				04965F5D1389A3A60032ADD8 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		04965F5F1389A3A60032ADD8 /* OrlenPOBR */ = {
+			isa = PBXGroup;
+			children = (
+				04965F681389A3A70032ADD8 /* OrlenPOBRAppDelegate.h */,
+				04965F691389A3A70032ADD8 /* OrlenPOBRAppDelegate.m */,
+				04965F6B1389A3A70032ADD8 /* MainWindow.xib */,
+				04965F6E1389A3A70032ADD8 /* MainViewController.h */,
+				04965F6F1389A3A70032ADD8 /* MainViewController.m */,
+				04965F711389A3A70032ADD8 /* MainView.xib */,
+				04965F731389A3A70032ADD8 /* FlipsideViewController.h */,
+				04965F741389A3A70032ADD8 /* FlipsideViewController.m */,
+				04965F761389A3A70032ADD8 /* FlipsideView.xib */,
+				04965F601389A3A60032ADD8 /* Supporting Files */,
+			);
+			path = OrlenPOBR;
+			sourceTree = "<group>";
+		};
+		04965F601389A3A60032ADD8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				04965F611389A3A60032ADD8 /* OrlenPOBR-Info.plist */,
+				04965F621389A3A60032ADD8 /* InfoPlist.strings */,
+				04965F651389A3A60032ADD8 /* OrlenPOBR-Prefix.pch */,
+				04965F661389A3A70032ADD8 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04965F831389A3A70032ADD8 /* OrlenPOBRTests */ = {
+			isa = PBXGroup;
+			children = (
+				04965F8A1389A3A70032ADD8 /* OrlenPOBRTests.h */,
+				04965F8C1389A3A70032ADD8 /* OrlenPOBRTests.m */,
+				04965F841389A3A70032ADD8 /* Supporting Files */,
+			);
+			path = OrlenPOBRTests;
+			sourceTree = "<group>";
+		};
+		04965F841389A3A70032ADD8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				04965F851389A3A70032ADD8 /* OrlenPOBRTests-Info.plist */,
+				04965F861389A3A70032ADD8 /* InfoPlist.strings */,
+				04965F891389A3A70032ADD8 /* OrlenPOBRTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		04965F541389A3A60032ADD8 /* OrlenPOBR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04965F901389A3A70032ADD8 /* Build configuration list for PBXNativeTarget "OrlenPOBR" */;
+			buildPhases = (
+				04965F511389A3A60032ADD8 /* Sources */,
+				04965F521389A3A60032ADD8 /* Frameworks */,
+				04965F531389A3A60032ADD8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OrlenPOBR;
+			productName = OrlenPOBR;
+			productReference = 04965F551389A3A60032ADD8 /* OrlenPOBR.app */;
+			productType = "com.apple.product-type.application";
+		};
+		04965F7C1389A3A70032ADD8 /* OrlenPOBRTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04965F931389A3A70032ADD8 /* Build configuration list for PBXNativeTarget "OrlenPOBRTests" */;
+			buildPhases = (
+				04965F781389A3A70032ADD8 /* Sources */,
+				04965F791389A3A70032ADD8 /* Frameworks */,
+				04965F7A1389A3A70032ADD8 /* Resources */,
+				04965F7B1389A3A70032ADD8 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04965F821389A3A70032ADD8 /* PBXTargetDependency */,
+			);
+			name = OrlenPOBRTests;
+			productName = OrlenPOBRTests;
+			productReference = 04965F7D1389A3A70032ADD8 /* OrlenPOBRTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04965F4C1389A3A60032ADD8 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 04965F4F1389A3A60032ADD8 /* Build configuration list for PBXProject "OrlenPOBR" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 04965F4A1389A3A60032ADD8;
+			productRefGroup = 04965F561389A3A60032ADD8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04965F541389A3A60032ADD8 /* OrlenPOBR */,
+				04965F7C1389A3A70032ADD8 /* OrlenPOBRTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		04965F531389A3A60032ADD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04965F641389A3A60032ADD8 /* InfoPlist.strings in Resources */,
+				04965F6D1389A3A70032ADD8 /* MainWindow.xib in Resources */,
+				04965F721389A3A70032ADD8 /* MainView.xib in Resources */,
+				04965F771389A3A70032ADD8 /* FlipsideView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04965F7A1389A3A70032ADD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04965F881389A3A70032ADD8 /* InfoPlist.strings in Resources */,
+				04965F8B1389A3A70032ADD8 /* OrlenPOBRTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		04965F7B1389A3A70032ADD8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04965F511389A3A60032ADD8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04965F671389A3A70032ADD8 /* main.m in Sources */,
+				04965F6A1389A3A70032ADD8 /* OrlenPOBRAppDelegate.m in Sources */,
+				04965F701389A3A70032ADD8 /* MainViewController.m in Sources */,
+				04965F751389A3A70032ADD8 /* FlipsideViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04965F781389A3A70032ADD8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04965F8D1389A3A70032ADD8 /* OrlenPOBRTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		04965F821389A3A70032ADD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04965F541389A3A60032ADD8 /* OrlenPOBR */;
+			targetProxy = 04965F811389A3A70032ADD8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		04965F621389A3A60032ADD8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04965F631389A3A60032ADD8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		04965F6B1389A3A70032ADD8 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04965F6C1389A3A70032ADD8 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		04965F861389A3A70032ADD8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04965F871389A3A70032ADD8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		04965F8E1389A3A70032ADD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		04965F8F1389A3A70032ADD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		04965F911389A3A70032ADD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OrlenPOBR/OrlenPOBR-Prefix.pch";
+				INFOPLIST_FILE = "OrlenPOBR/OrlenPOBR-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		04965F921389A3A70032ADD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OrlenPOBR/OrlenPOBR-Prefix.pch";
+				INFOPLIST_FILE = "OrlenPOBR/OrlenPOBR-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		04965F941389A3A70032ADD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/OrlenPOBR.app/OrlenPOBR";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OrlenPOBRTests/OrlenPOBRTests-Prefix.pch";
+				INFOPLIST_FILE = "OrlenPOBRTests/OrlenPOBRTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		04965F951389A3A70032ADD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/OrlenPOBR.app/OrlenPOBR";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OrlenPOBRTests/OrlenPOBRTests-Prefix.pch";
+				INFOPLIST_FILE = "OrlenPOBRTests/OrlenPOBRTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04965F4F1389A3A60032ADD8 /* Build configuration list for PBXProject "OrlenPOBR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04965F8E1389A3A70032ADD8 /* Debug */,
+				04965F8F1389A3A70032ADD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04965F901389A3A70032ADD8 /* Build configuration list for PBXNativeTarget "OrlenPOBR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04965F911389A3A70032ADD8 /* Debug */,
+				04965F921389A3A70032ADD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		04965F931389A3A70032ADD8 /* Build configuration list for PBXNativeTarget "OrlenPOBRTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04965F941389A3A70032ADD8 /* Debug */,
+				04965F951389A3A70032ADD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04965F4C1389A3A60032ADD8 /* Project object */;
+}

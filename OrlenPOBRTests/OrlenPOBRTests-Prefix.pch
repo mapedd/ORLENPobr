@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'OrlenPOBRTests' target in the 'OrlenPOBRTests' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+#endif
