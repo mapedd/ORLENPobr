@@ -14,16 +14,18 @@
 		04965F671389A3A70032ADD8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965F661389A3A70032ADD8 /* main.m */; };
 		04965F6A1389A3A70032ADD8 /* OrlenPOBRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965F691389A3A70032ADD8 /* OrlenPOBRAppDelegate.m */; };
 		04965F6D1389A3A70032ADD8 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04965F6B1389A3A70032ADD8 /* MainWindow.xib */; };
-		04965F701389A3A70032ADD8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965F6F1389A3A70032ADD8 /* MainViewController.m */; };
-		04965F721389A3A70032ADD8 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04965F711389A3A70032ADD8 /* MainView.xib */; };
-		04965F751389A3A70032ADD8 /* FlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965F741389A3A70032ADD8 /* FlipsideViewController.m */; };
-		04965F771389A3A70032ADD8 /* FlipsideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04965F761389A3A70032ADD8 /* FlipsideView.xib */; };
 		04965F7E1389A3A70032ADD8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04965F591389A3A60032ADD8 /* UIKit.framework */; };
 		04965F7F1389A3A70032ADD8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04965F5B1389A3A60032ADD8 /* Foundation.framework */; };
 		04965F801389A3A70032ADD8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04965F5D1389A3A60032ADD8 /* CoreGraphics.framework */; };
 		04965F881389A3A70032ADD8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04965F861389A3A70032ADD8 /* InfoPlist.strings */; };
 		04965F8B1389A3A70032ADD8 /* OrlenPOBRTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 04965F8A1389A3A70032ADD8 /* OrlenPOBRTests.h */; };
 		04965F8D1389A3A70032ADD8 /* OrlenPOBRTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965F8C1389A3A70032ADD8 /* OrlenPOBRTests.m */; };
+		04965F971389A3C30032ADD8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04965F961389A3C30032ADD8 /* AVFoundation.framework */; };
+		04965F9B1389A4060032ADD8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965F991389A4060032ADD8 /* MainViewController.m */; };
+		04965F9C1389A4060032ADD8 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04965F9A1389A4060032ADD8 /* MainView.xib */; };
+		04965F9F1389A4210032ADD8 /* OvalOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965F9E1389A4210032ADD8 /* OvalOverlayView.m */; };
+		04965FA31389A45C0032ADD8 /* FlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965FA11389A45B0032ADD8 /* FlipsideViewController.m */; };
+		04965FA61389A5690032ADD8 /* FlipsideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04965FA51389A5690032ADD8 /* FlipsideView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,25 +43,28 @@
 		04965F591389A3A60032ADD8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		04965F5B1389A3A60032ADD8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		04965F5D1389A3A60032ADD8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		04965F611389A3A60032ADD8 /* OrlenPOBR-Info.plist */ = {isa = PBXFileReference; path = "OrlenPOBR-Info.plist"; sourceTree = "<group>"; };
+		04965F611389A3A60032ADD8 /* OrlenPOBR-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OrlenPOBR-Info.plist"; sourceTree = "<group>"; };
 		04965F631389A3A60032ADD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		04965F651389A3A60032ADD8 /* OrlenPOBR-Prefix.pch */ = {isa = PBXFileReference; path = "OrlenPOBR-Prefix.pch"; sourceTree = "<group>"; };
+		04965F651389A3A60032ADD8 /* OrlenPOBR-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OrlenPOBR-Prefix.pch"; sourceTree = "<group>"; };
 		04965F661389A3A70032ADD8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		04965F681389A3A70032ADD8 /* OrlenPOBRAppDelegate.h */ = {isa = PBXFileReference; path = OrlenPOBRAppDelegate.h; sourceTree = "<group>"; };
+		04965F681389A3A70032ADD8 /* OrlenPOBRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrlenPOBRAppDelegate.h; sourceTree = "<group>"; };
 		04965F691389A3A70032ADD8 /* OrlenPOBRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrlenPOBRAppDelegate.m; sourceTree = "<group>"; };
 		04965F6C1389A3A70032ADD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		04965F6E1389A3A70032ADD8 /* MainViewController.h */ = {isa = PBXFileReference; path = MainViewController.h; sourceTree = "<group>"; };
-		04965F6F1389A3A70032ADD8 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		04965F711389A3A70032ADD8 /* MainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
-		04965F731389A3A70032ADD8 /* FlipsideViewController.h */ = {isa = PBXFileReference; path = FlipsideViewController.h; sourceTree = "<group>"; };
-		04965F741389A3A70032ADD8 /* FlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlipsideViewController.m; sourceTree = "<group>"; };
-		04965F761389A3A70032ADD8 /* FlipsideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FlipsideView.xib; sourceTree = "<group>"; };
 		04965F7D1389A3A70032ADD8 /* OrlenPOBRTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrlenPOBRTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		04965F851389A3A70032ADD8 /* OrlenPOBRTests-Info.plist */ = {isa = PBXFileReference; path = "OrlenPOBRTests-Info.plist"; sourceTree = "<group>"; };
+		04965F851389A3A70032ADD8 /* OrlenPOBRTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OrlenPOBRTests-Info.plist"; sourceTree = "<group>"; };
 		04965F871389A3A70032ADD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		04965F891389A3A70032ADD8 /* OrlenPOBRTests-Prefix.pch */ = {isa = PBXFileReference; path = "OrlenPOBRTests-Prefix.pch"; sourceTree = "<group>"; };
+		04965F891389A3A70032ADD8 /* OrlenPOBRTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OrlenPOBRTests-Prefix.pch"; sourceTree = "<group>"; };
 		04965F8A1389A3A70032ADD8 /* OrlenPOBRTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrlenPOBRTests.h; sourceTree = "<group>"; };
 		04965F8C1389A3A70032ADD8 /* OrlenPOBRTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrlenPOBRTests.m; sourceTree = "<group>"; };
+		04965F961389A3C30032ADD8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		04965F981389A4060032ADD8 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		04965F991389A4060032ADD8 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		04965F9A1389A4060032ADD8 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
+		04965F9D1389A4210032ADD8 /* OvalOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OvalOverlayView.h; sourceTree = "<group>"; };
+		04965F9E1389A4210032ADD8 /* OvalOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OvalOverlayView.m; sourceTree = "<group>"; };
+		04965FA01389A45B0032ADD8 /* FlipsideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlipsideViewController.h; sourceTree = "<group>"; };
+		04965FA11389A45B0032ADD8 /* FlipsideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlipsideViewController.m; sourceTree = "<group>"; };
+		04965FA51389A5690032ADD8 /* FlipsideView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlipsideView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +75,7 @@
 				04965F5A1389A3A60032ADD8 /* UIKit.framework in Frameworks */,
 				04965F5C1389A3A60032ADD8 /* Foundation.framework in Frameworks */,
 				04965F5E1389A3A60032ADD8 /* CoreGraphics.framework in Frameworks */,
+				04965F971389A3C30032ADD8 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +114,7 @@
 		04965F581389A3A60032ADD8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04965F961389A3C30032ADD8 /* AVFoundation.framework */,
 				04965F591389A3A60032ADD8 /* UIKit.framework */,
 				04965F5B1389A3A60032ADD8 /* Foundation.framework */,
 				04965F5D1389A3A60032ADD8 /* CoreGraphics.framework */,
@@ -121,12 +128,14 @@
 				04965F681389A3A70032ADD8 /* OrlenPOBRAppDelegate.h */,
 				04965F691389A3A70032ADD8 /* OrlenPOBRAppDelegate.m */,
 				04965F6B1389A3A70032ADD8 /* MainWindow.xib */,
-				04965F6E1389A3A70032ADD8 /* MainViewController.h */,
-				04965F6F1389A3A70032ADD8 /* MainViewController.m */,
-				04965F711389A3A70032ADD8 /* MainView.xib */,
-				04965F731389A3A70032ADD8 /* FlipsideViewController.h */,
-				04965F741389A3A70032ADD8 /* FlipsideViewController.m */,
-				04965F761389A3A70032ADD8 /* FlipsideView.xib */,
+				04965F981389A4060032ADD8 /* MainViewController.h */,
+				04965F991389A4060032ADD8 /* MainViewController.m */,
+				04965F9A1389A4060032ADD8 /* MainView.xib */,
+				04965FA01389A45B0032ADD8 /* FlipsideViewController.h */,
+				04965FA11389A45B0032ADD8 /* FlipsideViewController.m */,
+				04965FA51389A5690032ADD8 /* FlipsideView.xib */,
+				04965F9D1389A4210032ADD8 /* OvalOverlayView.h */,
+				04965F9E1389A4210032ADD8 /* OvalOverlayView.m */,
 				04965F601389A3A60032ADD8 /* Supporting Files */,
 			);
 			path = OrlenPOBR;
@@ -232,8 +241,8 @@
 			files = (
 				04965F641389A3A60032ADD8 /* InfoPlist.strings in Resources */,
 				04965F6D1389A3A70032ADD8 /* MainWindow.xib in Resources */,
-				04965F721389A3A70032ADD8 /* MainView.xib in Resources */,
-				04965F771389A3A70032ADD8 /* FlipsideView.xib in Resources */,
+				04965F9C1389A4060032ADD8 /* MainView.xib in Resources */,
+				04965FA61389A5690032ADD8 /* FlipsideView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,8 +280,9 @@
 			files = (
 				04965F671389A3A70032ADD8 /* main.m in Sources */,
 				04965F6A1389A3A70032ADD8 /* OrlenPOBRAppDelegate.m in Sources */,
-				04965F701389A3A70032ADD8 /* MainViewController.m in Sources */,
-				04965F751389A3A70032ADD8 /* FlipsideViewController.m in Sources */,
+				04965F9B1389A4060032ADD8 /* MainViewController.m in Sources */,
+				04965F9F1389A4210032ADD8 /* OvalOverlayView.m in Sources */,
+				04965FA31389A45C0032ADD8 /* FlipsideViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
