@@ -23,4 +23,6 @@
 @property (nonatomic, retain) IBOutlet UIButton *button;
 @property (nonatomic, retain) UIImagePickerController *picker;
 
+- (IBAction)showBeta:(id)sender;
+
 @end

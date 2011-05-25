@@ -10,6 +10,10 @@
 
 #import "MainViewController.h"
 
+
+#import "BWHockeyManager.h"
+
+
 @implementation OrlenPOBRAppDelegate
 
 
@@ -21,7 +25,23 @@
 {
     // Override point for customization after application launch.
     // Add the main view controller's view to the window and display.
-    self.window.rootViewController = self.mainViewController;
+    
+    // 4.x property
+    if ([self.window respondsToSelector:@selector(setRootViewController:)]) {
+        [self.window setRootViewController:self.mainViewController];
+    } else {
+        [self.window addSubview:self.mainViewController.view];
+    }
+    
+    // This variable is available if you add "CONFIGURATION_$(CONFIGURATION)"
+    // to the Preprocessor Macros in the project settings to all configurations
+#if !defined (CONFIGURATION_AppStore_Distribution)
+    // Add these two lines if you want to activate the authorization feature
+    //    [BWHockeyManager sharedHockeyManager].requireAuthorization = YES;
+    //    [BWHockeyManager sharedHockeyManager].authenticationSecret = @"ChangeThisToYourOwnSecretString";
+    [BWHockeyManager sharedHockeyManager].updateURL = @"http://alpha.buzzworks.de";
+    [BWHockeyManager sharedHockeyManager].delegate = self;
+#endif
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -70,6 +90,17 @@
     [_window release];
     [_mainViewController release];
     [super dealloc];
+}
+
+#pragma mark -
+#pragma mark BWHockeyControllerDelegate
+
+- (void)connectionOpened {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)connectionClosed {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 @end

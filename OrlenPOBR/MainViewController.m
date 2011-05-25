@@ -11,6 +11,10 @@
 #import <AVFoundation/AVFoundation.h>
 #import "OvalOverlayView.h"
 
+#if !defined (CONFIGURATION_AppStore_Distribution)
+#import "BWHockeyManager.h"
+#endif
+
 @interface UIImage (masking) 
 - (UIImage*) maskWithMask:(UIImage *)maskImage ;
 @end
@@ -173,6 +177,14 @@
     }
     
      
+}
+
+
+- (IBAction)showBeta:(id)sender{
+
+    BWHockeyViewController *hockeyViewController = [[BWHockeyManager sharedHockeyManager] hockeyViewController:YES];
+    [self.navigationController presentModalViewController:hockeyViewController animated:YES];
+
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
