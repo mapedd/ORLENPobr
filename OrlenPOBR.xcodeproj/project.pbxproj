@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04881607138D9CE900022C1F /* UIImage+Bytes.m in Sources */ = {isa = PBXBuildFile; fileRef = 04881606138D9CE900022C1F /* UIImage+Bytes.m */; };
 		04965F5A1389A3A60032ADD8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04965F591389A3A60032ADD8 /* UIKit.framework */; };
 		04965F5C1389A3A60032ADD8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04965F5B1389A3A60032ADD8 /* Foundation.framework */; };
 		04965F5E1389A3A60032ADD8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04965F5D1389A3A60032ADD8 /* CoreGraphics.framework */; };
@@ -41,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04881605138D9CE900022C1F /* UIImage+Bytes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Bytes.h"; sourceTree = "<group>"; };
+		04881606138D9CE900022C1F /* UIImage+Bytes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Bytes.m"; sourceTree = "<group>"; };
+		04881620138D9FEF00022C1F /* TKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKConstants.h; sourceTree = "<group>"; };
 		04965F551389A3A60032ADD8 /* OrlenPOBR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrlenPOBR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04965F591389A3A60032ADD8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		04965F5B1389A3A60032ADD8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -139,9 +143,12 @@
 				04965F9A1389A4060032ADD8 /* MainView.xib */,
 				04965FA01389A45B0032ADD8 /* FlipsideViewController.h */,
 				04965FA11389A45B0032ADD8 /* FlipsideViewController.m */,
+				04881605138D9CE900022C1F /* UIImage+Bytes.h */,
+				04881606138D9CE900022C1F /* UIImage+Bytes.m */,
 				04965FA51389A5690032ADD8 /* FlipsideView.xib */,
 				04965F9D1389A4210032ADD8 /* OvalOverlayView.h */,
 				04965F9E1389A4210032ADD8 /* OvalOverlayView.m */,
+				04881620138D9FEF00022C1F /* TKConstants.h */,
 				04965F601389A3A60032ADD8 /* Supporting Files */,
 			);
 			path = OrlenPOBR;
@@ -291,6 +298,7 @@
 				04965F9B1389A4060032ADD8 /* MainViewController.m in Sources */,
 				04965F9F1389A4210032ADD8 /* OvalOverlayView.m in Sources */,
 				04965FA31389A45C0032ADD8 /* FlipsideViewController.m in Sources */,
+				04881607138D9CE900022C1F /* UIImage+Bytes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

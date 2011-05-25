@@ -69,7 +69,7 @@
     if (self.image.image != nil) {
         FlipsideViewController *controller = [[FlipsideViewController alloc] initWithNibName:@"FlipsideView" bundle:nil];
         controller.delegate = self;
-        controller.workingImage1 = self.image.image;
+        controller.workingImage= self.image.image;
         
         controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         [self presentModalViewController:controller animated:YES];
@@ -193,8 +193,6 @@
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-
-    NSLog(@"index: %d", buttonIndex);
     
     if(actionSheet.numberOfButtons == 3){
         if (buttonIndex == 0)
