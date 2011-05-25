@@ -11,7 +11,7 @@
 #import "MainViewController.h"
 
 
-#import "BWHockeyManager.h"
+
 
 
 @implementation OrlenPOBRAppDelegate
@@ -33,15 +33,9 @@
         [self.window addSubview:self.mainViewController.view];
     }
     
-    // This variable is available if you add "CONFIGURATION_$(CONFIGURATION)"
-    // to the Preprocessor Macros in the project settings to all configurations
-#if !defined (CONFIGURATION_AppStore_Distribution)
-    // Add these two lines if you want to activate the authorization feature
-    //    [BWHockeyManager sharedHockeyManager].requireAuthorization = YES;
-    //    [BWHockeyManager sharedHockeyManager].authenticationSecret = @"ChangeThisToYourOwnSecretString";
-    [BWHockeyManager sharedHockeyManager].updateURL = @"http://alpha.buzzworks.de";
+    [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"d5ca658347224e3753619ca825b71ead"];
     [BWHockeyManager sharedHockeyManager].delegate = self;
-#endif
+
     [self.window makeKeyAndVisible];
     return YES;
 }

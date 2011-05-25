@@ -41,6 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.imageView.contentMode = UIViewContentModeScaleToFill;
     [self setImage];
 }
 
@@ -89,8 +90,8 @@
     for (int ii = 0 ; ii < width * height ; ++ii)
     {    
 
-//            rawData1[byteIndex]   = 0;
-			rawData1[byteIndex+1] = 0;
+            rawData1[byteIndex]   = 0;
+//			rawData1[byteIndex+1] = 0;
 			rawData1[byteIndex+2] = 0;
 //			rawData1[byteIndex+3] = 0x00;
 		
@@ -106,7 +107,8 @@
 								kCGImageAlphaPremultipliedLast ); 
 	
 	imageRef1 = CGBitmapContextCreateImage (ctx);  
-	UIImage* rawImage = [[UIImage alloc] initWithCGImage:imageRef1 scale:1.0 orientation:UIImageOrientationRight];
+	UIImage* rawImage = [[UIImage alloc] initWithCGImage:imageRef1];
+//    [[UIImage alloc] initWithCGImage:imageRef1 scale:1.0 orientation:UIImageOrientationRight];
 	CGImageRelease(imageRef1);
 	CGContextRelease(ctx);  
     
@@ -129,7 +131,7 @@
    
     [self.activity startAnimating]; 
     
-    [self substract];
+    [self findOrlenLogo];
 
 }
 
@@ -144,11 +146,14 @@
     
     for (int ii = 0 ; ii < width * height ; ++ii)
     {    
+        
+        int gray = rawData[byteIndex]+rawData[byteIndex+1]+rawData[byteIndex+2];
+        gray/=3;
     
-//        rawData[byteIndex]   = 0;
-        rawData[byteIndex+1] = 0;
-        rawData[byteIndex+2] = 0;
-//        rawData[byteIndex+3] = 0x00;
+        rawData[byteIndex]   = gray;
+        rawData[byteIndex+1] = gray;
+        rawData[byteIndex+2] = gray;
+//        rawData[byteIndex+3] = 0x00; // it's Alpha value, useless in this case
             
 		
 		byteIndex += 4;

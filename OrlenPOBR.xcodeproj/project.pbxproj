@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0487F341138DBA0F00E614D0 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 0487F340138DBA0F00E614D0 /* UIColor-Expanded.m */; };
 		04881607138D9CE900022C1F /* UIImage+Bytes.m in Sources */ = {isa = PBXBuildFile; fileRef = 04881606138D9CE900022C1F /* UIImage+Bytes.m */; };
 		0488163F138DAAE700022C1F /* BWApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 04881625138DAAE700022C1F /* BWApp.m */; };
 		04881640138DAAE700022C1F /* BWGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 04881627138DAAE700022C1F /* BWGlobal.m */; };
@@ -58,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0487F33F138DBA0F00E614D0 /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-Expanded.h"; sourceTree = "<group>"; };
+		0487F340138DBA0F00E614D0 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Expanded.m"; sourceTree = "<group>"; };
 		04881605138D9CE900022C1F /* UIImage+Bytes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Bytes.h"; sourceTree = "<group>"; };
 		04881606138D9CE900022C1F /* UIImage+Bytes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Bytes.m"; sourceTree = "<group>"; };
 		04881620138D9FEF00022C1F /* TKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKConstants.h; sourceTree = "<group>"; };
@@ -241,6 +244,8 @@
 				04965FA11389A45B0032ADD8 /* FlipsideViewController.m */,
 				04881605138D9CE900022C1F /* UIImage+Bytes.h */,
 				04881606138D9CE900022C1F /* UIImage+Bytes.m */,
+				0487F33F138DBA0F00E614D0 /* UIColor-Expanded.h */,
+				0487F340138DBA0F00E614D0 /* UIColor-Expanded.m */,
 				04965FA51389A5690032ADD8 /* FlipsideView.xib */,
 				04965F9D1389A4210032ADD8 /* OvalOverlayView.h */,
 				04965F9E1389A4210032ADD8 /* OvalOverlayView.m */,
@@ -409,6 +414,7 @@
 				04881647138DAAE700022C1F /* PSWebTableViewCell.m in Sources */,
 				04881648138DAAE700022C1F /* UIImage+HockeyAdditions.m in Sources */,
 				0488164A138DAAE700022C1F /* JSONKit.m in Sources */,
+				0487F341138DBA0F00E614D0 /* UIColor-Expanded.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

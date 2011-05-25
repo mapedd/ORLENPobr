@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "BWHockeyManager.h"
+
 @class MainViewController;
 
-@interface OrlenPOBRAppDelegate : NSObject <UIApplicationDelegate> {
+@interface OrlenPOBRAppDelegate : NSObject <UIApplicationDelegate, BWHockeyManagerDelegate> {
 
 }
 

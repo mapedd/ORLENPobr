@@ -10,10 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import <AVFoundation/AVFoundation.h>
 #import "OvalOverlayView.h"
-
-#if !defined (CONFIGURATION_AppStore_Distribution)
 #import "BWHockeyManager.h"
-#endif
+#import "UIImage+Bytes.h"
+
 
 @interface UIImage (masking) 
 - (UIImage*) maskWithMask:(UIImage *)maskImage ;
@@ -182,8 +181,9 @@
 
 - (IBAction)showBeta:(id)sender{
 
-    BWHockeyViewController *hockeyViewController = [[BWHockeyManager sharedHockeyManager] hockeyViewController:YES];
-    [self.navigationController presentModalViewController:hockeyViewController animated:YES];
+    BWHockeyViewController *hockeyViewController = [[BWHockeyManager sharedHockeyManager] hockeyViewController:NO];
+    [self presentModalViewController:hockeyViewController animated:YES];
+//    [self.navigationController presentModalViewController:hockeyViewController animated:YES];
 
 }
 

@@ -25,7 +25,9 @@ UIImage* imageFromBytes(unsigned char * bytes, NSUInteger width, NSUInteger heig
 								kCGImageAlphaPremultipliedLast ); 
 	
 	CGImageRef imageRef = CGBitmapContextCreateImage (ctx);  
-	image = [[UIImage alloc] initWithCGImage:imageRef scale:1.0 orientation:UIImageOrientationRight];
+	image = [[[UIImage alloc] initWithCGImage:imageRef scale:1.0 orientation:UIImageOrientationUp] autorelease];
+//    [UIImage imageWithCGImage:imageRef];
+//    [[UIImage alloc] initWithCGImage:imageRef scale:1.0 orientation:UIImageOrientationRight];
 	CGImageRelease(imageRef);
 	CGContextRelease(ctx);  
     
