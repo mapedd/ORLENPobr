@@ -44,6 +44,12 @@
 		04965F9F1389A4210032ADD8 /* OvalOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965F9E1389A4210032ADD8 /* OvalOverlayView.m */; };
 		04965FA31389A45C0032ADD8 /* FlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04965FA11389A45B0032ADD8 /* FlipsideViewController.m */; };
 		04965FA61389A5690032ADD8 /* FlipsideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04965FA51389A5690032ADD8 /* FlipsideView.xib */; };
+		04AAD562139422D1008F464B /* TKHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AAD55D139422D1008F464B /* TKHelper.m */; };
+		04AAD563139422D1008F464B /* LoggerClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AAD560139422D1008F464B /* LoggerClient.m */; };
+		04AAD5701394230B008F464B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAD56C1394230B008F464B /* MobileCoreServices.framework */; };
+		04AAD5711394230B008F464B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAD56D1394230B008F464B /* ImageIO.framework */; };
+		04AAD5721394230B008F464B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAD56E1394230B008F464B /* CFNetwork.framework */; };
+		04AAD5731394230B008F464B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAD56F1394230B008F464B /* SystemConfiguration.framework */; };
 		04AEB1221389B1B900282CBA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AEB1211389B1B900282CBA /* Default.png */; };
 		04AEB1271389B34F00282CBA /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AEB1261389B34F00282CBA /* icon.png */; };
 /* End PBXBuildFile section */
@@ -117,6 +123,15 @@
 		04965FA01389A45B0032ADD8 /* FlipsideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlipsideViewController.h; sourceTree = "<group>"; };
 		04965FA11389A45B0032ADD8 /* FlipsideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlipsideViewController.m; sourceTree = "<group>"; };
 		04965FA51389A5690032ADD8 /* FlipsideView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlipsideView.xib; sourceTree = "<group>"; };
+		04AAD55C139422D1008F464B /* TKHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKHelper.h; sourceTree = "<group>"; };
+		04AAD55D139422D1008F464B /* TKHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKHelper.m; sourceTree = "<group>"; };
+		04AAD55F139422D1008F464B /* LoggerClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerClient.h; sourceTree = "<group>"; };
+		04AAD560139422D1008F464B /* LoggerClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggerClient.m; sourceTree = "<group>"; };
+		04AAD561139422D1008F464B /* LoggerCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerCommon.h; sourceTree = "<group>"; };
+		04AAD56C1394230B008F464B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		04AAD56D1394230B008F464B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		04AAD56E1394230B008F464B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		04AAD56F1394230B008F464B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		04AEB1211389B1B900282CBA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		04AEB1261389B34F00282CBA /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +147,10 @@
 				04965F971389A3C30032ADD8 /* AVFoundation.framework in Frameworks */,
 				0488164E138DAB1400022C1F /* SystemConfiguration.framework in Frameworks */,
 				04881650138DAB2B00022C1F /* QuartzCore.framework in Frameworks */,
+				04AAD5701394230B008F464B /* MobileCoreServices.framework in Frameworks */,
+				04AAD5711394230B008F464B /* ImageIO.framework in Frameworks */,
+				04AAD5721394230B008F464B /* CFNetwork.framework in Frameworks */,
+				04AAD5731394230B008F464B /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +239,10 @@
 		04965F581389A3A60032ADD8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04AAD56C1394230B008F464B /* MobileCoreServices.framework */,
+				04AAD56D1394230B008F464B /* ImageIO.framework */,
+				04AAD56E1394230B008F464B /* CFNetwork.framework */,
+				04AAD56F1394230B008F464B /* SystemConfiguration.framework */,
 				0488164F138DAB2B00022C1F /* QuartzCore.framework */,
 				0488164D138DAB1400022C1F /* SystemConfiguration.framework */,
 				04965F961389A3C30032ADD8 /* AVFoundation.framework */,
@@ -233,6 +256,9 @@
 		04965F5F1389A3A60032ADD8 /* OrlenPOBR */ = {
 			isa = PBXGroup;
 			children = (
+				04AAD55C139422D1008F464B /* TKHelper.h */,
+				04AAD55D139422D1008F464B /* TKHelper.m */,
+				04AAD55E139422D1008F464B /* NSLogger */,
 				04881623138DAADA00022C1F /* HockeyKit */,
 				04965F681389A3A70032ADD8 /* OrlenPOBRAppDelegate.h */,
 				04965F691389A3A70032ADD8 /* OrlenPOBRAppDelegate.m */,
@@ -242,11 +268,11 @@
 				04965F9A1389A4060032ADD8 /* MainView.xib */,
 				04965FA01389A45B0032ADD8 /* FlipsideViewController.h */,
 				04965FA11389A45B0032ADD8 /* FlipsideViewController.m */,
+				04965FA51389A5690032ADD8 /* FlipsideView.xib */,
 				04881605138D9CE900022C1F /* UIImage+Bytes.h */,
 				04881606138D9CE900022C1F /* UIImage+Bytes.m */,
 				0487F33F138DBA0F00E614D0 /* UIColor-Expanded.h */,
 				0487F340138DBA0F00E614D0 /* UIColor-Expanded.m */,
-				04965FA51389A5690032ADD8 /* FlipsideView.xib */,
 				04965F9D1389A4210032ADD8 /* OvalOverlayView.h */,
 				04965F9E1389A4210032ADD8 /* OvalOverlayView.m */,
 				04881620138D9FEF00022C1F /* TKConstants.h */,
@@ -284,6 +310,16 @@
 				04965F891389A3A70032ADD8 /* OrlenPOBRTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04AAD55E139422D1008F464B /* NSLogger */ = {
+			isa = PBXGroup;
+			children = (
+				04AAD55F139422D1008F464B /* LoggerClient.h */,
+				04AAD560139422D1008F464B /* LoggerClient.m */,
+				04AAD561139422D1008F464B /* LoggerCommon.h */,
+			);
+			path = NSLogger;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,6 +451,8 @@
 				04881648138DAAE700022C1F /* UIImage+HockeyAdditions.m in Sources */,
 				0488164A138DAAE700022C1F /* JSONKit.m in Sources */,
 				0487F341138DBA0F00E614D0 /* UIColor-Expanded.m in Sources */,
+				04AAD562139422D1008F464B /* TKHelper.m in Sources */,
+				04AAD563139422D1008F464B /* LoggerClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,7 +514,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -490,7 +528,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 			};

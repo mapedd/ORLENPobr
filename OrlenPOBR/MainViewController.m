@@ -82,7 +82,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 - (void)didReceiveMemoryWarning
@@ -106,6 +106,8 @@
 - (void)viewDidLoad{
    
     [super viewDidLoad];
+    
+    self.navigationController.navigationBarHidden = NO;
     
     self.picker = [[[UIImagePickerController alloc] init] autorelease];
     [self.picker setDelegate:self];
@@ -158,19 +160,16 @@
 #pragma - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-//    for (NSString *key in info) {
-//       NSLog(@"key: %@, object: %@", key, [info objectForKey:key]);
-//    }
     
     UIImage *photo;
     
     [self dismissModalViewControllerAnimated:YES];
     if ([info objectForKey:UIImagePickerControllerOriginalImage]) {
-            photo = [info objectForKey:UIImagePickerControllerOriginalImage];
+        photo = [info objectForKey:UIImagePickerControllerOriginalImage];
             
-            [self.image setImage:[self imageWithImage:photo scaledToSize:CGSizeMake(320, 480)]];
-
-            [self.button setTitle:@"Find ORLEN" forState:UIControlStateNormal];
+        [self.image setImage:[self imageWithImage:photo scaledToSize:CGSizeMake(320, 480)]];
+        [TKHelper logImageWithDescription:self.image.image];
+        [self.button setTitle:@"Find ORLEN" forState:UIControlStateNormal];
 
 
     }
