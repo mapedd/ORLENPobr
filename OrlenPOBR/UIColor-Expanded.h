@@ -46,6 +46,12 @@
 
 + (UIColor *)colorWithName:(NSString *)cssColorName;
 
+// Mapedd
+
+- (CGFloat)distanceFromColorWithRed:(CGFloat)red green:(CGFloat)green andBlue:(CGFloat)blue;
+
++ (CGFloat)floatingComponentFromChar:(unsigned char)byte;
+
 @end
 
 #if SUPPORTS_UNDOCUMENTED_API

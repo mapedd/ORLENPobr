@@ -82,7 +82,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+    return [TKHelper isSupportedOrientation:interfaceOrientation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -111,9 +111,6 @@
     
     self.picker = [[[UIImagePickerController alloc] init] autorelease];
     [self.picker setDelegate:self];
-
-    self.image.layer.borderWidth = 3.0f;
-    self.image.layer.borderColor = [[UIColor whiteColor] CGColor];
     
 
 }

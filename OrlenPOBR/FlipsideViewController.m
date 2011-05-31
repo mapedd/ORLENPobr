@@ -9,6 +9,7 @@
 #import "FlipsideViewController.h"
 #import "TKConstants.h"
 #import "UIImage+Bytes.h"
+#import "UIColor-Expanded.h"
 
 @implementation FlipsideViewController
 
@@ -42,7 +43,6 @@
 {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden= YES;
-    self.imageView.contentMode = UIViewContentModeScaleToFill;
     [self setImage];
 }
 
@@ -54,7 +54,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+    return [TKHelper isSupportedOrientation:interfaceOrientation];
 }
 
 #pragma mark - Actions
@@ -138,25 +138,40 @@
 
 - (void)findOrlenLogo{
     
+    static const CGFloat kMaxDistance = 0.3f;
+    
     NSUInteger width = [self.workingImage width];
     NSUInteger height = [self.workingImage height];
     
     unsigned char *rawData = [self.workingImage bytes];
     
+    CGFloat distance, red, green, blue;
+    
+    UIColor *orlenRed = [UIColor colorWithRed:TKOrlenRed green:TKOrlenGreen blue:TKOrlenBlue alpha:1.0];
+    
     int byteIndex = 0;
     
     for (int ii = 0 ; ii < width * height ; ++ii)
-    {    
+    {   
         
-        int gray = rawData[byteIndex]+rawData[byteIndex+1]+rawData[byteIndex+2];
-        gray/=3;
-    
-        rawData[byteIndex]   = gray;
-        rawData[byteIndex+1] = gray;
-        rawData[byteIndex+2] = gray;
-//        rawData[byteIndex+3] = 0x00; // it's Alpha value, useless in this case
-            
-		
+        red = [UIColor floatingComponentFromChar:rawData[byteIndex]];
+        green = [UIColor floatingComponentFromChar:rawData[byteIndex+1]];
+        blue = [UIColor floatingComponentFromChar:rawData[byteIndex+2]];
+        
+        distance = [orlenRed distanceFromColorWithRed:red green:green andBlue:blue];
+        
+        if (distance > kMaxDistance) {
+
+            rawData[byteIndex] = 255;
+            rawData[byteIndex+1] = 255;
+            rawData[byteIndex+2] = 255;
+        }
+        else{
+            rawData[byteIndex] = 0;
+            rawData[byteIndex+1] = 0;
+            rawData[byteIndex+2] = 0;
+        }
+        
 		byteIndex += 4;
 		
     }

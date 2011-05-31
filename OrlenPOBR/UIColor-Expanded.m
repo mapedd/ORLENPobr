@@ -394,6 +394,32 @@ static NSMutableDictionary *colorNameCache = nil;
 	return color;
 }
 
+- (CGFloat)distanceFromColorWithRed:(CGFloat)red green:(CGFloat)green andBlue:(CGFloat)blue;{
+    CGFloat distance;
+    
+    CGFloat selfRed = [self red];
+    CGFloat selfGreen = [self green];
+    CGFloat selfBlue = [self blue];
+    
+    distance = powf(selfRed-red, 2)+powf(selfBlue-blue, 2)+powf(selfGreen-green, 2);
+    
+    return distance;
+}
+
++ (CGFloat)floatingComponentFromChar:(unsigned char)byte{
+    CGFloat floating = 0.0f;
+    
+    NSInteger integer  = (NSInteger)byte;
+    
+    if (integer < 0 || integer > 255) {
+        return floating;
+    }
+    
+    floating = integer*1.0f/255.0f;
+    
+    return floating;
+}
+
 #pragma mark UIColor_Expanded initialization
 
 + (void)load {

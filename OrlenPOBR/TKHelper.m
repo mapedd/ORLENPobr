@@ -31,7 +31,7 @@ CGPoint CGRectCenter(CGRect rect){
 
 
 + (BOOL)isSupportedOrientation:(UIInterfaceOrientation )orientation{
-    if (orientation == UIInterfaceOrientationLandscapeLeft) {
+    if (orientation != UIInterfaceOrientationPortraitUpsideDown) {
         return YES;
     }
     else
@@ -203,7 +203,8 @@ NSString * TKNSStringFromBOOL(BOOL yesOrNo){
 }
 
 - (NSString *)TKdescription{
-    return [NSString stringWithFormat:@"%@, w: %.2f, h:%.2f",[self description], self.size.width, self.size.height];
+    return [NSString stringWithFormat:@"%@, w: %.2f, h:%.2f, scale: %.2f, orientation: %d"
+            ,[self description], self.size.width, self.size.height, self.scale, self.imageOrientation];
     
 }
 

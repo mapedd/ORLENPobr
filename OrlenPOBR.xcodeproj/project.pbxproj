@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04489B3413954BC50036B080 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04489B3213954BC50036B080 /* MainWindow-iPad.xib */; };
 		0487F341138DBA0F00E614D0 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 0487F340138DBA0F00E614D0 /* UIColor-Expanded.m */; };
 		04881607138D9CE900022C1F /* UIImage+Bytes.m in Sources */ = {isa = PBXBuildFile; fileRef = 04881606138D9CE900022C1F /* UIImage+Bytes.m */; };
 		0488163F138DAAE700022C1F /* BWApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 04881625138DAAE700022C1F /* BWApp.m */; };
@@ -65,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04489B3313954BC50036B080 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		0487F33F138DBA0F00E614D0 /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-Expanded.h"; sourceTree = "<group>"; };
 		0487F340138DBA0F00E614D0 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Expanded.m"; sourceTree = "<group>"; };
 		04881605138D9CE900022C1F /* UIImage+Bytes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Bytes.h"; sourceTree = "<group>"; };
@@ -167,6 +169,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04489B3113954BC20036B080 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				04489B3213954BC50036B080 /* MainWindow-iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		04881623138DAADA00022C1F /* HockeyKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,19 +266,17 @@
 		04965F5F1389A3A60032ADD8 /* OrlenPOBR */ = {
 			isa = PBXGroup;
 			children = (
+				04489B3113954BC20036B080 /* iPad */,
 				04AAD55C139422D1008F464B /* TKHelper.h */,
 				04AAD55D139422D1008F464B /* TKHelper.m */,
 				04AAD55E139422D1008F464B /* NSLogger */,
 				04881623138DAADA00022C1F /* HockeyKit */,
 				04965F681389A3A70032ADD8 /* OrlenPOBRAppDelegate.h */,
 				04965F691389A3A70032ADD8 /* OrlenPOBRAppDelegate.m */,
-				04965F6B1389A3A70032ADD8 /* MainWindow.xib */,
 				04965F981389A4060032ADD8 /* MainViewController.h */,
 				04965F991389A4060032ADD8 /* MainViewController.m */,
-				04965F9A1389A4060032ADD8 /* MainView.xib */,
 				04965FA01389A45B0032ADD8 /* FlipsideViewController.h */,
 				04965FA11389A45B0032ADD8 /* FlipsideViewController.m */,
-				04965FA51389A5690032ADD8 /* FlipsideView.xib */,
 				04881605138D9CE900022C1F /* UIImage+Bytes.h */,
 				04881606138D9CE900022C1F /* UIImage+Bytes.m */,
 				0487F33F138DBA0F00E614D0 /* UIColor-Expanded.h */,
@@ -276,6 +284,9 @@
 				04965F9D1389A4210032ADD8 /* OvalOverlayView.h */,
 				04965F9E1389A4210032ADD8 /* OvalOverlayView.m */,
 				04881620138D9FEF00022C1F /* TKConstants.h */,
+				04965F6B1389A3A70032ADD8 /* MainWindow.xib */,
+				04965F9A1389A4060032ADD8 /* MainView.xib */,
+				04965FA51389A5690032ADD8 /* FlipsideView.xib */,
 				04965F601389A3A60032ADD8 /* Supporting Files */,
 			);
 			path = OrlenPOBR;
@@ -398,6 +409,7 @@
 				04881649138DAAE700022C1F /* Hockey.bundle in Resources */,
 				0488164B138DAAE700022C1F /* README.md in Resources */,
 				0488164C138DAAE700022C1F /* README.mkdown in Resources */,
+				04489B3413954BC50036B080 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +487,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		04489B3213954BC50036B080 /* MainWindow-iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04489B3313954BC50036B080 /* en */,
+			);
+			name = "MainWindow-iPad.xib";
+			sourceTree = "<group>";
+		};
 		04965F621389A3A60032ADD8 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -544,7 +564,9 @@
 				GCC_PREFIX_HEADER = "OrlenPOBR/OrlenPOBR-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "CONFIGURATION_$(CONFIGURATION)";
 				INFOPLIST_FILE = "OrlenPOBR/OrlenPOBR-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -557,7 +579,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OrlenPOBR/OrlenPOBR-Prefix.pch";
 				INFOPLIST_FILE = "OrlenPOBR/OrlenPOBR-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
