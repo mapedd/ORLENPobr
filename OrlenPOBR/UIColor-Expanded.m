@@ -407,6 +407,7 @@ static NSMutableDictionary *colorNameCache = nil;
 }
 
 + (CGFloat)floatingComponentFromChar:(unsigned char)byte{
+    
     CGFloat floating = 0.0f;
     
     NSInteger integer  = (NSInteger)byte;

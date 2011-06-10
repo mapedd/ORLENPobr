@@ -70,6 +70,7 @@
 - (IBAction)showInfo:(id)sender
 {    
     if (self.image.image != nil) {
+        
         FlipsideViewController *controller = [[FlipsideViewController alloc] initWithNibName:@"FlipsideView" bundle:nil];
         controller.delegate = self;
         controller.workingImage= self.image.image;
@@ -164,7 +165,7 @@
     if ([info objectForKey:UIImagePickerControllerOriginalImage]) {
         photo = [info objectForKey:UIImagePickerControllerOriginalImage];
             
-        [self.image setImage:[self imageWithImage:photo scaledToSize:CGSizeMake(320, 480)]];
+        [self.image setImage:photo];
         [TKHelper logImageWithDescription:self.image.image];
         [self.button setTitle:@"Find ORLEN" forState:UIControlStateNormal];
 
@@ -176,10 +177,10 @@
 
 
 - (IBAction)showBeta:(id)sender{
+    CFRelease(NULL);
 
-    BWHockeyViewController *hockeyViewController = [[BWHockeyManager sharedHockeyManager] hockeyViewController:NO];
-    [self presentModalViewController:hockeyViewController animated:YES];
-//    [self.navigationController presentModalViewController:hockeyViewController animated:YES];
+//    BWHockeyViewController *hockeyViewController = [[BWHockeyManager sharedHockeyManager] hockeyViewController:NO];
+//    [self presentModalViewController:hockeyViewController animated:YES];
 
 }
 

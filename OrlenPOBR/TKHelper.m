@@ -13,6 +13,126 @@ CGPoint CGRectCenter(CGRect rect){
     return CGPointMake(rect.origin.x+rect.size.width/2, rect.origin.y+rect.size.height/2);
 }
 
+NSString * TKNSStringFromBOOL(BOOL yesOrNo){
+    if(yesOrNo){
+        return [NSString stringWithFormat:@"YES"];
+    }
+    else{
+        return [NSString stringWithFormat:@"NO"];
+    }
+}
+
+NSString * TKNSStringFromUIViewContentMode(UIViewContentMode mode){
+    NSString *string;
+    switch (mode) {
+        case UIViewContentModeBottom:
+            string = [NSString stringWithFormat:@"UIViewContentModeBottom"];
+            break;
+        case UIViewContentModeBottomLeft:
+            string = [NSString stringWithFormat:@"UIViewContentModeBottomLeft"];
+            break;
+        case UIViewContentModeBottomRight:
+            string = [NSString stringWithFormat:@"UIViewContentModeBottomRight"];
+            break;
+        case UIViewContentModeCenter:
+            string = [NSString stringWithFormat:@"UIViewContentModeCenter"];
+            break;
+        case UIViewContentModeLeft:
+            string = [NSString stringWithFormat:@"UIViewContentModeLeft"];
+            break;
+        case UIViewContentModeRedraw:
+            string = [NSString stringWithFormat:@"UIViewContentModeRedraw"];
+            break;
+        case UIViewContentModeRight:
+            string = [NSString stringWithFormat:@"UIViewContentModeRight"];
+            break;
+        case UIViewContentModeScaleAspectFill:
+            string = [NSString stringWithFormat:@"UIViewContentModeScaleAspectFill"];
+            break;
+        case UIViewContentModeScaleAspectFit:
+            string = [NSString stringWithFormat:@"UIViewContentModeScaleAspectFit"];
+            break;
+        case UIViewContentModeScaleToFill:
+            string = [NSString stringWithFormat:@"UIViewContentModeScaleToFill"];
+            break;
+        case UIViewContentModeTop:
+            string = [NSString stringWithFormat:@"UIViewContentModeTop"];
+            break;
+        case UIViewContentModeTopLeft:
+            string = [NSString stringWithFormat:@"UIViewContentModeTopLeft"];
+            break;
+        case UIViewContentModeTopRight:
+            string = [NSString stringWithFormat:@"UIViewContentModeTopRight"];
+            break;
+            
+        default:
+            string = nil;
+            break;
+    }
+    
+    return string;
+}
+
+NSString * TKNSStringFromUIInterfaceOrientation(UIInterfaceOrientation orientation){
+    NSString *string;
+    switch (orientation) {
+        case UIInterfaceOrientationLandscapeLeft:
+            string = [NSString stringWithFormat:@"UIInterfaceOrientationLandscapeLeft"];
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            string = [NSString stringWithFormat:@"UIInterfaceOrientationLandscapeRight"];
+            break;
+        case UIInterfaceOrientationPortrait:
+            string = [NSString stringWithFormat:@"UIInterfaceOrientationPortrait"];
+            break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+            string = [NSString stringWithFormat:@"UIInterfaceOrientationPortraitUpsideDown"];
+            break;
+        default:
+            string = nil;
+            break;
+    }
+    
+    return string;
+    
+}
+
+NSString * TKNSStringFromUIImageOrientation(UIImageOrientation orientation){
+    NSString *string;
+    
+    switch (orientation) {
+        case UIImageOrientationDown:
+            string = [NSString stringWithFormat:@"UIInterfaceOrientationLandscapeRight"];
+            break;
+        case UIImageOrientationDownMirrored:
+            string = [NSString stringWithFormat:@"UIImageOrientationDownMirrored"];
+            break;
+        case UIImageOrientationLeft:
+            string = [NSString stringWithFormat:@"UIImageOrientationLeft"];
+            break;
+        case UIImageOrientationLeftMirrored:
+            string = [NSString stringWithFormat:@"UIImageOrientationLeftMirrored"];
+            break;
+        case UIImageOrientationRight:
+            string = [NSString stringWithFormat:@"UIImageOrientationRight"];
+            break;
+        case UIImageOrientationRightMirrored:
+            string = [NSString stringWithFormat:@"UIImageOrientationRightMirrored"];
+            break;
+        case UIImageOrientationUp:
+            string = [NSString stringWithFormat:@"UIImageOrientationUp"];
+            break;
+        case UIImageOrientationUpMirrored:
+            string = [NSString stringWithFormat:@"UIImageOrientationUpMirrored"];
+            break;
+        default:
+            string = nil;
+            break;
+    }
+    
+    return string;
+}
+
 
 #define iPadLandscapeWidth 1024.0
 #define iPadLandscapeHeight 768.0
@@ -29,7 +149,6 @@ CGPoint CGRectCenter(CGRect rect){
 
 }
 
-
 + (BOOL)isSupportedOrientation:(UIInterfaceOrientation )orientation{
     if (orientation != UIInterfaceOrientationPortraitUpsideDown) {
         return YES;
@@ -37,7 +156,6 @@ CGPoint CGRectCenter(CGRect rect){
     else
         return NO;
 }
-
 
 + (CGPoint)centerForView:(UIView *)aView foriPadInOrientation:(UIInterfaceOrientation)interfaceOrientation{
     CGPoint center;
@@ -104,7 +222,7 @@ CGPoint CGRectCenter(CGRect rect){
     [[self class] logView:view];
 }
 
-+(NSString*) generateGUID{
++ (NSString*)generateGUID{
     
 	CFUUIDRef theUUID = CFUUIDCreate(NULL);
 	CFStringRef string = CFUUIDCreateString(NULL, theUUID);
@@ -152,15 +270,6 @@ CGPoint CGRectCenter(CGRect rect){
 @end
 
 
-NSString * TKNSStringFromBOOL(BOOL yesOrNo){
-    if(yesOrNo){
-        return [NSString stringWithFormat:@"YES"];
-    }
-    else{
-        return [NSString stringWithFormat:@"NO"];
-    }
-}
-
 @implementation UIImage (Masking)
 
 - (void)maskWithMask:(UIImage *)aMaskImage {
@@ -203,8 +312,8 @@ NSString * TKNSStringFromBOOL(BOOL yesOrNo){
 }
 
 - (NSString *)TKdescription{
-    return [NSString stringWithFormat:@"%@, w: %.2f, h:%.2f, scale: %.2f, orientation: %d"
-            ,[self description], self.size.width, self.size.height, self.scale, self.imageOrientation];
+    return [NSString stringWithFormat:@"%@, w: %.2f, h:%.2f, scale: %.2f, orientation: %@"
+            ,[self description], self.size.width, self.size.height, self.scale, TKNSStringFromUIImageOrientation(self.imageOrientation)];
     
 }
 

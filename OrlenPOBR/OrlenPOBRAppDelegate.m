@@ -33,9 +33,18 @@
         [self.window addSubview:self.mainViewController.view];
     }
     
-    [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"d5ca658347224e3753619ca825b71ead"];
+    NSString *appIdentifier = [[NSString alloc] initWithFormat:@"d5ca658347224e3753619ca825b71ead"];
+    
+    [[BWHockeyManager sharedHockeyManager] setAppIdentifier:appIdentifier];
     [BWHockeyManager sharedHockeyManager].delegate = self;
+    
+    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:appIdentifier];
+    [BWQuincyManager sharedQuincyManager].feedbackActivated = YES;
+    [BWQuincyManager sharedQuincyManager].delegate = self;
 
+    [appIdentifier release];
+    
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -91,10 +100,36 @@
 
 - (void)connectionOpened {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    NSLog(@"connection opened");
 }
 
 - (void)connectionClosed {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    NSLog(@"connection closed");
 }
+
+
+#pragma mark -
+#pragma mark BWQuincyControllerDelegate
+
+
+// Return the userid the crashreport should contain, empty by default
+-(NSString *) crashReportUserID{
+    
+    return [NSString stringWithFormat:@"crashReportUserID"];
+}
+
+// Return the contact value (e.g. email) the crashreport should contain, empty by default
+-(NSString *) crashReportContact{
+    
+    return [NSString stringWithFormat:@"crashReportContact"];
+}
+
+// Return the description the crashreport should contain, empty by default
+-(NSString *) crashReportDescription{
+    
+    return [NSString stringWithFormat:@"crashReportDescription"];
+}
+
 
 @end

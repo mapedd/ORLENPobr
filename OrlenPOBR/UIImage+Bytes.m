@@ -45,6 +45,7 @@ UIImage* imageFromBytes(unsigned char * bytes, NSUInteger width, NSUInteger heig
     CGImageRef imageRef1 = [self CGImage];
     NSUInteger width = CGImageGetWidth(imageRef1);
     NSUInteger height = CGImageGetHeight(imageRef1);
+    NSLog(@"bytes_width: %d, byte_height: %d", width, height);
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     unsigned char *rawData = malloc(height * width * 4);
     NSUInteger bytesPerPixel = 4;
@@ -69,7 +70,7 @@ UIImage* imageFromBytes(unsigned char * bytes, NSUInteger width, NSUInteger heig
 
 - (NSUInteger)height{
     CGImageRef imageRef = [self CGImage];
-    NSUInteger height = CGImageGetWidth(imageRef);
+    NSUInteger height = CGImageGetHeight(imageRef);
     return height;
 }
 

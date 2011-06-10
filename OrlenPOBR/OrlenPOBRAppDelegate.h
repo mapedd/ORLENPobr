@@ -10,9 +10,11 @@
 
 #import "BWHockeyManager.h"
 
+#import "BWQuincyManager.h"
+
 @class MainViewController;
 
-@interface OrlenPOBRAppDelegate : NSObject <UIApplicationDelegate, BWHockeyManagerDelegate> {
+@interface OrlenPOBRAppDelegate : NSObject <UIApplicationDelegate, BWHockeyManagerDelegate, BWQuincyManagerDelegate> {
 
 }
 

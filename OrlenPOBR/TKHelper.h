@@ -18,6 +18,14 @@
 /** Returns center CGPoint of a CGRect structure */
 CGPoint CGRectCenter(CGRect rect);
 
+NSString * TKNSStringFromBOOL(BOOL yesOrNo);
+
+NSString * TKNSStringFromUIViewContentMode(UIViewContentMode mode);
+
+NSString * TKNSStringFromUIInterfaceOrientation(UIInterfaceOrientation orientation);
+
+NSString * TKNSStringFromUIImageOrientation(UIImageOrientation orientation);
+
 @interface TKHelper : NSObject {}
 
 + (CGFloat)systemVersion;
@@ -60,7 +68,7 @@ CGPoint CGRectCenter(CGRect rect);
 
 @end
 
-NSString * TKNSStringFromBOOL(BOOL yesOrNo);
+
 
 @interface UIImage (Masking)
 

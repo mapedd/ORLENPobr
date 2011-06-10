@@ -16,7 +16,7 @@
     #import "TKHelper.h"
 #endif
 
-
+/*
 #define DEBUG
 
 #ifdef DEBUG
@@ -32,3 +32,4 @@
     #define LOG_DATA(...)       do{}while(0)
     #define NSLog(...)     
 #endif
+*/

@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0447C7C113993DFC00C232E3 /* TKByteImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0447C7C013993DFC00C232E3 /* TKByteImage.m */; };
 		04489B3413954BC50036B080 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04489B3213954BC50036B080 /* MainWindow-iPad.xib */; };
+		04489B3B139554D10036B080 /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04489B37139554D10036B080 /* BWQuincyManager.m */; };
+		04489B3C139554D10036B080 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04489B38139554D10036B080 /* CrashReporter.framework */; };
+		04489B3D139554D10036B080 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04489B39139554D10036B080 /* LICENSE.txt */; };
+		04489B3E139554D10036B080 /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04489B3A139554D10036B080 /* Quincy.bundle */; };
+		045611D7139582E500F35301 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 045611D6139582E500F35301 /* Default-Landscape.png */; };
+		045611DA1395830E00F35301 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 045611D91395830D00F35301 /* Default.png */; };
 		0487F341138DBA0F00E614D0 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 0487F340138DBA0F00E614D0 /* UIColor-Expanded.m */; };
 		04881607138D9CE900022C1F /* UIImage+Bytes.m in Sources */ = {isa = PBXBuildFile; fileRef = 04881606138D9CE900022C1F /* UIImage+Bytes.m */; };
 		0488163F138DAAE700022C1F /* BWApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 04881625138DAAE700022C1F /* BWApp.m */; };
@@ -51,7 +58,6 @@
 		04AAD5711394230B008F464B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAD56D1394230B008F464B /* ImageIO.framework */; };
 		04AAD5721394230B008F464B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAD56E1394230B008F464B /* CFNetwork.framework */; };
 		04AAD5731394230B008F464B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAD56F1394230B008F464B /* SystemConfiguration.framework */; };
-		04AEB1221389B1B900282CBA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AEB1211389B1B900282CBA /* Default.png */; };
 		04AEB1271389B34F00282CBA /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AEB1261389B34F00282CBA /* icon.png */; };
 /* End PBXBuildFile section */
 
@@ -66,7 +72,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0447C7BF13993DFC00C232E3 /* TKByteImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKByteImage.h; sourceTree = "<group>"; };
+		0447C7C013993DFC00C232E3 /* TKByteImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKByteImage.m; sourceTree = "<group>"; };
 		04489B3313954BC50036B080 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		04489B36139554D10036B080 /* BWQuincyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWQuincyManager.h; sourceTree = "<group>"; };
+		04489B37139554D10036B080 /* BWQuincyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWQuincyManager.m; sourceTree = "<group>"; };
+		04489B38139554D10036B080 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CrashReporter.framework; path = OrlenPOBR/QuincyKit/CrashReporter.framework; sourceTree = "<group>"; };
+		04489B39139554D10036B080 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		04489B3A139554D10036B080 /* Quincy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Quincy.bundle; path = QuincyKit/Quincy.bundle; sourceTree = "<group>"; };
+		045611D6139582E500F35301 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
+		045611D91395830D00F35301 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0487F33F138DBA0F00E614D0 /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-Expanded.h"; sourceTree = "<group>"; };
 		0487F340138DBA0F00E614D0 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Expanded.m"; sourceTree = "<group>"; };
 		04881605138D9CE900022C1F /* UIImage+Bytes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Bytes.h"; sourceTree = "<group>"; };
@@ -134,7 +149,6 @@
 		04AAD56D1394230B008F464B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		04AAD56E1394230B008F464B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		04AAD56F1394230B008F464B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		04AEB1211389B1B900282CBA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		04AEB1261389B34F00282CBA /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,6 +167,7 @@
 				04AAD5711394230B008F464B /* ImageIO.framework in Frameworks */,
 				04AAD5721394230B008F464B /* CFNetwork.framework in Frameworks */,
 				04AAD5731394230B008F464B /* SystemConfiguration.framework in Frameworks */,
+				04489B3C139554D10036B080 /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +190,16 @@
 				04489B3213954BC50036B080 /* MainWindow-iPad.xib */,
 			);
 			name = iPad;
+			sourceTree = "<group>";
+		};
+		04489B35139554D10036B080 /* QuincyKit */ = {
+			isa = PBXGroup;
+			children = (
+				04489B36139554D10036B080 /* BWQuincyManager.h */,
+				04489B37139554D10036B080 /* BWQuincyManager.m */,
+				04489B39139554D10036B080 /* LICENSE.txt */,
+			);
+			path = QuincyKit;
 			sourceTree = "<group>";
 		};
 		04881623138DAADA00022C1F /* HockeyKit */ = {
@@ -228,7 +253,8 @@
 		04965F4A1389A3A60032ADD8 = {
 			isa = PBXGroup;
 			children = (
-				04AEB1211389B1B900282CBA /* Default.png */,
+				045611D91395830D00F35301 /* Default.png */,
+				045611D6139582E500F35301 /* Default-Landscape.png */,
 				04AEB1261389B34F00282CBA /* icon.png */,
 				04965F5F1389A3A60032ADD8 /* OrlenPOBR */,
 				04965F831389A3A70032ADD8 /* OrlenPOBRTests */,
@@ -249,6 +275,7 @@
 		04965F581389A3A60032ADD8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04489B38139554D10036B080 /* CrashReporter.framework */,
 				04AAD56C1394230B008F464B /* MobileCoreServices.framework */,
 				04AAD56D1394230B008F464B /* ImageIO.framework */,
 				04AAD56E1394230B008F464B /* CFNetwork.framework */,
@@ -269,6 +296,7 @@
 				04489B3113954BC20036B080 /* iPad */,
 				04AAD55C139422D1008F464B /* TKHelper.h */,
 				04AAD55D139422D1008F464B /* TKHelper.m */,
+				04489B35139554D10036B080 /* QuincyKit */,
 				04AAD55E139422D1008F464B /* NSLogger */,
 				04881623138DAADA00022C1F /* HockeyKit */,
 				04965F681389A3A70032ADD8 /* OrlenPOBRAppDelegate.h */,
@@ -284,6 +312,8 @@
 				04965F9D1389A4210032ADD8 /* OvalOverlayView.h */,
 				04965F9E1389A4210032ADD8 /* OvalOverlayView.m */,
 				04881620138D9FEF00022C1F /* TKConstants.h */,
+				0447C7BF13993DFC00C232E3 /* TKByteImage.h */,
+				0447C7C013993DFC00C232E3 /* TKByteImage.m */,
 				04965F6B1389A3A70032ADD8 /* MainWindow.xib */,
 				04965F9A1389A4060032ADD8 /* MainView.xib */,
 				04965FA51389A5690032ADD8 /* FlipsideView.xib */,
@@ -296,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				04965F611389A3A60032ADD8 /* OrlenPOBR-Info.plist */,
+				04489B3A139554D10036B080 /* Quincy.bundle */,
 				04965F621389A3A60032ADD8 /* InfoPlist.strings */,
 				04965F651389A3A60032ADD8 /* OrlenPOBR-Prefix.pch */,
 				04965F661389A3A70032ADD8 /* main.m */,
@@ -404,12 +435,15 @@
 				04965F6D1389A3A70032ADD8 /* MainWindow.xib in Resources */,
 				04965F9C1389A4060032ADD8 /* MainView.xib in Resources */,
 				04965FA61389A5690032ADD8 /* FlipsideView.xib in Resources */,
-				04AEB1221389B1B900282CBA /* Default.png in Resources */,
 				04AEB1271389B34F00282CBA /* icon.png in Resources */,
 				04881649138DAAE700022C1F /* Hockey.bundle in Resources */,
 				0488164B138DAAE700022C1F /* README.md in Resources */,
 				0488164C138DAAE700022C1F /* README.mkdown in Resources */,
 				04489B3413954BC50036B080 /* MainWindow-iPad.xib in Resources */,
+				04489B3D139554D10036B080 /* LICENSE.txt in Resources */,
+				04489B3E139554D10036B080 /* Quincy.bundle in Resources */,
+				045611D7139582E500F35301 /* Default-Landscape.png in Resources */,
+				045611DA1395830E00F35301 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +499,8 @@
 				0487F341138DBA0F00E614D0 /* UIColor-Expanded.m in Sources */,
 				04AAD562139422D1008F464B /* TKHelper.m in Sources */,
 				04AAD563139422D1008F464B /* LoggerClient.m in Sources */,
+				04489B3B139554D10036B080 /* BWQuincyManager.m in Sources */,
+				0447C7C113993DFC00C232E3 /* TKByteImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,12 +595,17 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/OrlenPOBR/QuincyKit\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OrlenPOBR/OrlenPOBR-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "CONFIGURATION_$(CONFIGURATION)";
 				INFOPLIST_FILE = "OrlenPOBR/OrlenPOBR-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -576,10 +617,15 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/OrlenPOBR/QuincyKit\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OrlenPOBR/OrlenPOBR-Prefix.pch";
 				INFOPLIST_FILE = "OrlenPOBR/OrlenPOBR-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -641,7 +687,7 @@
 				04965F8F1389A3A70032ADD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		04965F901389A3A70032ADD8 /* Build configuration list for PBXNativeTarget "OrlenPOBR" */ = {
 			isa = XCConfigurationList;
@@ -650,7 +696,7 @@
 				04965F921389A3A70032ADD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		04965F931389A3A70032ADD8 /* Build configuration list for PBXNativeTarget "OrlenPOBRTests" */ = {
 			isa = XCConfigurationList;
@@ -659,7 +705,7 @@
 				04965F951389A3A70032ADD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

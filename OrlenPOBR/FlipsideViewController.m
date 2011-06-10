@@ -10,15 +10,38 @@
 #import "TKConstants.h"
 #import "UIImage+Bytes.h"
 #import "UIColor-Expanded.h"
+#import "TKByteImage.h"
+
+
+BOOL TKPixelIsWhite(TKPixel pixel){
+    if (pixel.red   == TKWhite &&
+        pixel.green == TKWhite &&
+        pixel.blue  == TKWhite) {
+        return YES;
+    }
+    else
+        return NO;
+}
+
+BOOL TKPixelIsBlack(TKPixel pixel){
+    if (pixel.red   == TKBlack &&
+        pixel.green == TKBlack &&
+        pixel.blue  == TKBlack) {
+        return YES;
+    }
+    else
+        return NO;
+}
+
+
 
 @implementation FlipsideViewController
 
+#pragma mark - Synthesize
 @synthesize delegate=_delegate;
-
 @synthesize imageView = _imageView;
 @synthesize workingImage = _workingImage;
 @synthesize activity = _activity;
-
 
 
 - (void)dealloc
@@ -36,19 +59,26 @@
     
     // Release any cached data, images, etc. that aren't in use.
 }
-
+#pragma mark -
 #pragma mark - View lifecycle
-
+#pragma mark -
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden= YES;
-    [self setImage];
+    self.imageView.image = self.workingImage;
+    
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    [self doSegmentation:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -57,103 +87,75 @@
     return [TKHelper isSupportedOrientation:interfaceOrientation];
 }
 
-#pragma mark - Actions
-
+#pragma mark - 
+#pragma mark - IBActions
+#pragma mark - 
 - (IBAction)done:(id)sender
 {
     [self.delegate flipsideViewControllerDidFinish:self];
 }
 
-
-- (void)substract{
-    //NSLog(@"startSegmentation, (r, g, b, o) = (%d,%d,%d,%d)", redDifference, greenDifference, blueDifference, overallDifference);
-    
-	CGContextRef ctx; 
-    CGImageRef imageRef1 = [self.workingImage CGImage];
-    NSUInteger width = CGImageGetWidth(imageRef1);
-    NSUInteger height = CGImageGetHeight(imageRef1);
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    unsigned char *rawData1 = malloc(height * width * 4);
-    NSUInteger bytesPerPixel = 4;
-    NSUInteger bytesPerRow = bytesPerPixel * width;
-    NSUInteger bitsPerComponent = 8;
-    CGContextRef context1 = CGBitmapContextCreate(rawData1, width, height,
-                                                  bitsPerComponent, bytesPerRow, colorSpace,
-                                                  kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
-    CGColorSpaceRelease(colorSpace);
-	
-    CGContextDrawImage(context1, CGRectMake(0, 0, width, height), imageRef1);
-    CGContextRelease(context1);
-
-    int byteIndex = (bytesPerRow * 0) + 0 * bytesPerPixel;
-    
-    
-    for (int ii = 0 ; ii < width * height ; ++ii)
-    {    
-
-            rawData1[byteIndex]   = 0;
-//			rawData1[byteIndex+1] = 0;
-			rawData1[byteIndex+2] = 0;
-//			rawData1[byteIndex+3] = 0x00;
-		
-    }
-    
-	
-	ctx = CGBitmapContextCreate(rawData1,  
-								CGImageGetWidth( imageRef1 ),  
-								CGImageGetHeight( imageRef1 ),  
-								8,  
-								CGImageGetBytesPerRow( imageRef1 ),  
-								CGImageGetColorSpace( imageRef1 ),  
-								kCGImageAlphaPremultipliedLast ); 
-	
-	imageRef1 = CGBitmapContextCreateImage (ctx);  
-	UIImage* rawImage = [[UIImage alloc] initWithCGImage:imageRef1];
-//    [[UIImage alloc] initWithCGImage:imageRef1 scale:1.0 orientation:UIImageOrientationRight];
-	CGImageRelease(imageRef1);
-	CGContextRelease(ctx);  
-    
-    self.workingImage = rawImage;
-    [rawImage release];
-	free(rawData1);
-    
-    [self setImage];
-    [self.activity stopAnimating];
-}
-
-- (void)setImage{
-    
-    self.imageView.image = self.workingImage;
-
-}
-
-
 - (IBAction)doSegmentation:(id) sender {
-   
-    [self.activity startAnimating]; 
     
     [self findOrlenLogo];
 
 }
 
+#pragma mark - 
+#pragma mark - Image Processing
+#pragma mark - 
+
 - (void)findOrlenLogo{
     
-    static const CGFloat kMaxDistance = 0.3f;
+    totalWidth = 0;
+    totalHeight = 0;
+    currentIndex =0;
+    
+    [self.activity startAnimating]; 
+    
+    if (self.workingImage == nil) {
+        return;
+    }
+    
+    [TKHelper logImageWithDescription:self.workingImage];
     
     NSUInteger width = [self.workingImage width];
     NSUInteger height = [self.workingImage height];
     
+    totalWidth = width;
+    totalHeight = height;
+    
+    NSLog(@"width: %d, height:%d", width, height);
+    
     unsigned char *rawData = [self.workingImage bytes];
+    
+    if (rawData == NULL) {
+        return;
+    }
     
     CGFloat distance, red, green, blue;
     
     UIColor *orlenRed = [UIColor colorWithRed:TKOrlenRed green:TKOrlenGreen blue:TKOrlenBlue alpha:1.0];
     
-    int byteIndex = 0;
+    unsigned long byteIndex = 0;
     
-    for (int ii = 0 ; ii < width * height ; ++ii)
+
+    NSInteger nrows = width;
+    NSInteger ncolumns = height;
+    mPixels = calloc(sizeof(TKPixel*), nrows);
+    if(mPixels == NULL){NSLog(@"Not enough memory to allocate array.");}
+    for(NSUInteger i = 0; i < nrows; i++)
+    {
+        mPixels[i] = calloc(sizeof(TKPixel), ncolumns);
+        if(mPixels[i] == NULL){NSLog(@"Not enough memory to allocate array.");}
+    }
+    
+    
+    // do segmentation
+    
+    
+    for (unsigned long ii = 0 ; ii < width * height ; ii++)
     {   
-        
         red = [UIColor floatingComponentFromChar:rawData[byteIndex]];
         green = [UIColor floatingComponentFromChar:rawData[byteIndex+1]];
         blue = [UIColor floatingComponentFromChar:rawData[byteIndex+2]];
@@ -172,16 +174,182 @@
             rawData[byteIndex+2] = 0;
         }
         
+        
 		byteIndex += 4;
 		
     }
     
-    self.imageView.image = imageFromBytes(rawData, width, height);
+    byteIndex =0 ;
     
+    // write from array to two-dimensional pixel array
+    
+    for (int m=0; m<nrows; m++) {
+        for (int n=0; n<ncolumns; n++) {
+            if (rawData[byteIndex] == 255){
+                mPixels[m][n].red = TKWhite;
+                mPixels[m][n].green = TKWhite;
+                mPixels[m][n].blue = TKWhite;
+                mPixels[m][n].alpha = TKWhite;
+            }
+            else{
+                mPixels[m][n].red = TKBlack;
+                mPixels[m][n].green = TKBlack;
+                mPixels[m][n].blue = TKBlack;
+                mPixels[m][n].alpha = TKWhite;
+            }
+            
+            byteIndex+=4;
+        }
+    }
+    
+    
+    // and here the actual recognition takes place
+    
+    
+    for (int k = 0; k<1; k++) {
+        [self TKDeleteSmallObjets]; 
+    }
+
+ 
+    
+    
+    // write again to ordinaty array and then display
+    byteIndex = 0;
+
+    for (int m=0; m<nrows; m++) {
+        for (int n=0; n<ncolumns; n++) {
+
+            rawData[byteIndex] = mPixels[m][n].red;
+            rawData[byteIndex+1] = mPixels[m][n].green;
+            rawData[byteIndex+2] = mPixels[m][n].blue;
+            rawData[byteIndex+3] = mPixels[m][n].alpha;
+            
+            byteIndex+=4;
+        }
+    }
+    
+    
+    self.imageView.image = nil;
+    
+    TKByteImage *img = [[TKByteImage alloc] initWithImage:imageFromBytes(rawData, width, height)];
+    
+    
+    self.imageView.image = [img currentImage];
+    
+    
+    free(mPixels);
     free(rawData);
     
-    [self.activity performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:NO];
+    [self.activity stopAnimating];
 }
 
+
+- (void)TKBurnForX:(int)x andY:(int)y{
+    
+    printf("TKBurn x:%d y:%d, index = %d \n", x, y, currentIndex);
+    
+    
+    
+    
+    if (mPixels == NULL) {
+        return;
+    }
+    
+    if (x>totalWidth || x<0) {
+        return;
+    }
+    
+    if (x>totalHeight || y<0) {
+        return;
+    }
+    
+    if (mPixels[x][y].red == TKWhite && mPixels[x][y].green == TKWhite && mPixels[x][y].blue == TKWhite) {
+        
+        mPixels[x][y].red = 255;
+        mPixels[x][y].green = 0;
+        mPixels[x][y].blue = 0;
+        
+        [self TKBurnForX:x andY:y-1];
+        [self TKBurnForX:x+1 andY:y];
+        [self TKBurnForX:x andY:y+11];
+        [self TKBurnForX:x-1 andY:y];
+    }
+    else{
+        return; 
+    }
+    
+}
+- (void)TKDeleteSmallObjets{
+    
+    
+    NSLog(@"deleting small objects");
+    
+    if (mPixels == NULL) {
+        return;
+    }
+    
+    TKPixel **pixels;
+    pixels = calloc(sizeof(TKPixel*), totalWidth);
+    if(mPixels == NULL){NSLog(@"Not enough memory to allocate array.");}
+    for(NSUInteger i = 0; i < totalWidth; i++)
+    {
+        pixels[i] = calloc(sizeof(TKPixel), totalWidth);
+        if(mPixels[i] == NULL){NSLog(@"Not enough memory to allocate array.");}
+    }
+    
+    for (int m=0; m<totalWidth; m++) {
+        for (int n=0; n<totalHeight; n++) {
+            pixels[m][n].red = mPixels[m][n].red;
+            pixels[m][n].green = mPixels[m][n].green;
+            pixels[m][n].blue = mPixels[m][n].blue;
+            pixels[m][n].alpha = mPixels[m][n].alpha;
+        }
+    }
+    
+    for (int m=0; m<totalWidth; m++) {
+        for (int n=0; n<totalHeight; n++) {
+            
+        if (m<totalHeight/2) {
+                if (
+                    TKPixelIsBlack(mPixels[m][n]) 
+                    )
+                {
+                    //NSLog(@"whitening pixel : (%d,%d)", m,n);
+                    pixels[m][n].red = 0;
+                    pixels[m][n].green = 0;
+                    pixels[m][n].blue = 255;
+                }
+            //}
+        }
+    }
+    
+    
+    for (int m=0; m<totalWidth; m++) {
+        for (int n=0; n<totalHeight; n++) {
+            mPixels[m][n].red = pixels[m][n].red;
+            mPixels[m][n].green = pixels[m][n].green;
+            mPixels[m][n].blue = pixels[m][n].blue;
+            mPixels[m][n].alpha = pixels[m][n].alpha;
+        }
+    }
+    
+    free(pixels);
+}
+- (void)TKGrowObjets{
+    
+}
+
+//&&
+//(
+// TKPixelIsWhite(mPixels[m][n-1]) || 
+// TKPixelIsWhite(mPixels[m-1][n]) || TKPixelIsWhite(mPixels[m+1][n]) || 
+// TKPixelIsWhite(mPixels[m][n+1])
+// )
+
+//                    (
+//                    TKPixelIsWhite(mPixels[m-1][n-1]) || TKPixelIsWhite(mPixels[m][n-1]) || TKPixelIsWhite(mPixels[m+1][n-1]) || 
+//                    TKPixelIsWhite(mPixels[m-1][n]) || TKPixelIsWhite(mPixels[m+1][n]) || 
+//                    TKPixelIsWhite(mPixels[m+1][n-1]) || TKPixelIsWhite(mPixels[m][n+1]) || TKPixelIsWhite(mPixels[m+1][n+1])
+//                    )
 
 @end
