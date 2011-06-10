@@ -309,7 +309,7 @@ BOOL TKPixelIsBlack(TKPixel pixel){
     for (int m=0; m<totalWidth; m++) {
         for (int n=0; n<totalHeight; n++) {
             
-        if (m<totalHeight/2) {
+            if (m<totalHeight/2) {
                 if (
                     TKPixelIsBlack(mPixels[m][n]) 
                     )
@@ -319,7 +319,7 @@ BOOL TKPixelIsBlack(TKPixel pixel){
                     pixels[m][n].green = 0;
                     pixels[m][n].blue = 255;
                 }
-            //}
+            }
         }
     }
     
