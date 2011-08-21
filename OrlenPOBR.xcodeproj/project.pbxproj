@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0438C25413E73836002A48D3 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 0438C25313E73836002A48D3 /* test.png */; };
+		0438C25713E739C3002A48D3 /* test2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0438C25613E739C3002A48D3 /* test2.png */; };
 		0447C7C113993DFC00C232E3 /* TKByteImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0447C7C013993DFC00C232E3 /* TKByteImage.m */; };
 		04489B3413954BC50036B080 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04489B3213954BC50036B080 /* MainWindow-iPad.xib */; };
 		04489B3B139554D10036B080 /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04489B37139554D10036B080 /* BWQuincyManager.m */; };
@@ -57,8 +59,11 @@
 		04AAD5701394230B008F464B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAD56C1394230B008F464B /* MobileCoreServices.framework */; };
 		04AAD5711394230B008F464B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAD56D1394230B008F464B /* ImageIO.framework */; };
 		04AAD5721394230B008F464B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAD56E1394230B008F464B /* CFNetwork.framework */; };
-		04AAD5731394230B008F464B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAD56F1394230B008F464B /* SystemConfiguration.framework */; };
 		04AEB1271389B34F00282CBA /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AEB1261389B34F00282CBA /* icon.png */; };
+		04CC302F13A26F7500BCBEE3 /* orlen1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04CC302C13A26F7500BCBEE3 /* orlen1.jpg */; };
+		04CC303013A26F7500BCBEE3 /* orlen2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04CC302D13A26F7500BCBEE3 /* orlen2.jpg */; };
+		04CC303113A26F7500BCBEE3 /* orlen3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04CC302E13A26F7500BCBEE3 /* orlen3.jpg */; };
+		04DF4ADF13E86257009534CD /* test3.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DF4ADE13E86257009534CD /* test3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +77,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0438C25313E73836002A48D3 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
+		0438C25613E739C3002A48D3 /* test2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test2.png; sourceTree = "<group>"; };
 		0447C7BF13993DFC00C232E3 /* TKByteImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKByteImage.h; sourceTree = "<group>"; };
 		0447C7C013993DFC00C232E3 /* TKByteImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKByteImage.m; sourceTree = "<group>"; };
 		04489B3313954BC50036B080 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
@@ -150,6 +157,11 @@
 		04AAD56E1394230B008F464B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		04AAD56F1394230B008F464B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		04AEB1261389B34F00282CBA /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		04BD366213C3AE1F001E8BF3 /* NonRecursiveFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonRecursiveFill.h; sourceTree = "<group>"; };
+		04CC302C13A26F7500BCBEE3 /* orlen1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = orlen1.jpg; path = ../../orlen1.jpg; sourceTree = "<group>"; };
+		04CC302D13A26F7500BCBEE3 /* orlen2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = orlen2.jpg; path = ../../orlen2.jpg; sourceTree = "<group>"; };
+		04CC302E13A26F7500BCBEE3 /* orlen3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = orlen3.jpg; path = ../../orlen3.jpg; sourceTree = "<group>"; };
+		04DF4ADE13E86257009534CD /* test3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +178,6 @@
 				04AAD5701394230B008F464B /* MobileCoreServices.framework in Frameworks */,
 				04AAD5711394230B008F464B /* ImageIO.framework in Frameworks */,
 				04AAD5721394230B008F464B /* CFNetwork.framework in Frameworks */,
-				04AAD5731394230B008F464B /* SystemConfiguration.framework in Frameworks */,
 				04489B3C139554D10036B080 /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,6 +323,7 @@
 				04965F9D1389A4210032ADD8 /* OvalOverlayView.h */,
 				04965F9E1389A4210032ADD8 /* OvalOverlayView.m */,
 				04881620138D9FEF00022C1F /* TKConstants.h */,
+				04BD366213C3AE1F001E8BF3 /* NonRecursiveFill.h */,
 				0447C7BF13993DFC00C232E3 /* TKByteImage.h */,
 				0447C7C013993DFC00C232E3 /* TKByteImage.m */,
 				04965F6B1389A3A70032ADD8 /* MainWindow.xib */,
@@ -325,6 +337,12 @@
 		04965F601389A3A60032ADD8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0438C25313E73836002A48D3 /* test.png */,
+				0438C25613E739C3002A48D3 /* test2.png */,
+				04DF4ADE13E86257009534CD /* test3.png */,
+				04CC302C13A26F7500BCBEE3 /* orlen1.jpg */,
+				04CC302D13A26F7500BCBEE3 /* orlen2.jpg */,
+				04CC302E13A26F7500BCBEE3 /* orlen3.jpg */,
 				04965F611389A3A60032ADD8 /* OrlenPOBR-Info.plist */,
 				04489B3A139554D10036B080 /* Quincy.bundle */,
 				04965F621389A3A60032ADD8 /* InfoPlist.strings */,
@@ -408,6 +426,9 @@
 /* Begin PBXProject section */
 		04965F4C1389A3A60032ADD8 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 04965F4F1389A3A60032ADD8 /* Build configuration list for PBXProject "OrlenPOBR" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -444,6 +465,12 @@
 				04489B3E139554D10036B080 /* Quincy.bundle in Resources */,
 				045611D7139582E500F35301 /* Default-Landscape.png in Resources */,
 				045611DA1395830E00F35301 /* Default.png in Resources */,
+				04CC302F13A26F7500BCBEE3 /* orlen1.jpg in Resources */,
+				04CC303013A26F7500BCBEE3 /* orlen2.jpg in Resources */,
+				04CC303113A26F7500BCBEE3 /* orlen3.jpg in Resources */,
+				0438C25413E73836002A48D3 /* test.png in Resources */,
+				0438C25713E739C3002A48D3 /* test2.png in Resources */,
+				04DF4ADF13E86257009534CD /* test3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,6 +595,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
@@ -582,6 +610,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;

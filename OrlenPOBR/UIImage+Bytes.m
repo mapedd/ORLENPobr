@@ -24,12 +24,17 @@ UIImage* imageFromBytes(unsigned char * bytes, NSUInteger width, NSUInteger heig
 								CGColorSpaceCreateDeviceRGB(),  
 								kCGImageAlphaPremultipliedLast ); 
 	
-	CGImageRef imageRef = CGBitmapContextCreateImage (ctx);  
+    if (ctx == NULL) {
+        NSLog(@"context from bytes is NULL");
+        return nil;
+    }
+    
+    CGImageRef imageRef = CGBitmapContextCreateImage (ctx);  
 	image = [[[UIImage alloc] initWithCGImage:imageRef scale:1.0 orientation:UIImageOrientationUp] autorelease];
-//    [UIImage imageWithCGImage:imageRef];
-//    [[UIImage alloc] initWithCGImage:imageRef scale:1.0 orientation:UIImageOrientationRight];
+    //    [UIImage imageWithCGImage:imageRef];
+    //    [[UIImage alloc] initWithCGImage:imageRef scale:1.0 orientation:UIImageOrientationRight];
 	CGImageRelease(imageRef);
-	CGContextRelease(ctx);  
+	CGContextRelease(ctx); 
     
 	//free(bytes);
 

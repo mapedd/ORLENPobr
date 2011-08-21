@@ -7,10 +7,11 @@
 //
 
 #import "FlipsideViewController.h"
-#import "TKConstants.h"
+
 #import "UIImage+Bytes.h"
 #import "UIColor-Expanded.h"
 #import "TKByteImage.h"
+#import "TKBWImageIndexator.h"
 
 
 BOOL TKPixelIsWhite(TKPixel pixel){
@@ -33,7 +34,50 @@ BOOL TKPixelIsBlack(TKPixel pixel){
         return NO;
 }
 
+BOOL TKValidCoordinate(int m,int n, int rows, int columns, int margin){
+        
+    if (margin > rows/2 || margin > columns/2) {
+        return NO;
+    }
+    
+    if (m>margin && m<rows-margin && n>margin && n< columns-margin ) {
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
 
+TKPixel TKColorPixelToRed(void){
+    TKPixel pixel;
+    pixel.red = TKWhite;
+    pixel.green = TKBlack;
+    pixel.blue = TKBlack;
+    pixel.alpha = TKWhite;
+    return pixel;
+}
+
+void TKBurnPixels(TKPixel **pixels, int x, int y){
+    
+}
+
+TKPoint TKPointMake(int x, int y){
+    TKPoint point;
+    
+    point.x = x;
+    point.y = y;
+    
+    return point;
+}
+
+BOOL TKPointIsEqualToPoint(TKPoint p1, TKPoint p2){
+    if (p1.x == p2.x && p1.y == p2.y) {
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
 
 @implementation FlipsideViewController
 
@@ -43,35 +87,36 @@ BOOL TKPixelIsBlack(TKPixel pixel){
 @synthesize workingImage = _workingImage;
 @synthesize activity = _activity;
 
+#pragma mark -
+#pragma mark - NSObject
+#pragma mark -
 
-- (void)dealloc
-{
+- (void)dealloc{
     self.workingImage = nil;
     self.imageView = nil;
     self.activity = nil;
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning{
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc. that aren't in use.
 }
+
 #pragma mark -
 #pragma mark - View lifecycle
 #pragma mark -
-- (void)viewDidLoad
-{
+
+- (void)viewDidLoad{
     [super viewDidLoad];
     self.navigationController.navigationBarHidden= YES;
     self.imageView.image = self.workingImage;
     
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload{
     [super viewDidUnload];
 }
 
@@ -81,8 +126,7 @@ BOOL TKPixelIsBlack(TKPixel pixel){
     [self doSegmentation:nil];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
     // Return YES for supported orientations
     return [TKHelper isSupportedOrientation:interfaceOrientation];
 }
@@ -90,8 +134,7 @@ BOOL TKPixelIsBlack(TKPixel pixel){
 #pragma mark - 
 #pragma mark - IBActions
 #pragma mark - 
-- (IBAction)done:(id)sender
-{
+- (IBAction)done:(id)sender{
     [self.delegate flipsideViewControllerDidFinish:self];
 }
 
@@ -106,7 +149,7 @@ BOOL TKPixelIsBlack(TKPixel pixel){
 #pragma mark - 
 
 - (void)findOrlenLogo{
-    
+    /*
     totalWidth = 0;
     totalHeight = 0;
     currentIndex =0;
@@ -139,9 +182,13 @@ BOOL TKPixelIsBlack(TKPixel pixel){
     
     unsigned long byteIndex = 0;
     
+    
+    // init points for burning /
+    points = calloc(sizeof(TKPoint), totalWidth*totalHeight);
+    
 
-    NSInteger nrows = width;
-    NSInteger ncolumns = height;
+    NSInteger nrows = height;
+    NSInteger ncolumns = width;
     mPixels = calloc(sizeof(TKPixel*), nrows);
     if(mPixels == NULL){NSLog(@"Not enough memory to allocate array.");}
     for(NSUInteger i = 0; i < nrows; i++)
@@ -184,20 +231,13 @@ BOOL TKPixelIsBlack(TKPixel pixel){
     // write from array to two-dimensional pixel array
     
     for (int m=0; m<nrows; m++) {
-        for (int n=0; n<ncolumns; n++) {
-            if (rawData[byteIndex] == 255){
-                mPixels[m][n].red = TKWhite;
-                mPixels[m][n].green = TKWhite;
-                mPixels[m][n].blue = TKWhite;
-                mPixels[m][n].alpha = TKWhite;
-            }
-            else{
-                mPixels[m][n].red = TKBlack;
-                mPixels[m][n].green = TKBlack;
-                mPixels[m][n].blue = TKBlack;
-                mPixels[m][n].alpha = TKWhite;
-            }
-            
+       for (int n=0; n<ncolumns; n++) { 
+           
+            mPixels[m][n].red = rawData[byteIndex];
+            mPixels[m][n].green = rawData[byteIndex+1];
+            mPixels[m][n].blue = rawData[byteIndex+2];
+            mPixels[m][n].alpha = rawData[byteIndex+3];
+
             byteIndex+=4;
         }
     }
@@ -209,11 +249,35 @@ BOOL TKPixelIsBlack(TKPixel pixel){
     for (int k = 0; k<1; k++) {
         [self TKDeleteSmallObjets]; 
     }
-
- 
+    
+    for (int k = 0; k<1; k++) {
+        [self TKGrowObjets]; 
+    }
+    
+    //
+    
+    BOOL seedSet = NO;
+    
+    if (TKPixelIsWhite(mPixels[0][0])) {
+        points[0] = TKPointMake(0, 0);
+    }
+    else{
+        int i = 0;
+        while (seedSet == NO) {
+            if (TKPixelIsWhite(mPixels[i][i])) {
+                points[0] = TKPointMake(i, i);
+                seedSet = YES;    
+            }
+            i++;
+        }
+    }
+    
+    TKPoint firstPoint = points[0];
+    printf("point[0][0] = %d,%d\n", firstPoint.x,firstPoint.y);
     
     
-    // write again to ordinaty array and then display
+    
+    // write again to ordinary array and then display
     byteIndex = 0;
 
     for (int m=0; m<nrows; m++) {
@@ -230,25 +294,26 @@ BOOL TKPixelIsBlack(TKPixel pixel){
     
     
     self.imageView.image = nil;
-    
+   
     TKByteImage *img = [[TKByteImage alloc] initWithImage:imageFromBytes(rawData, width, height)];
-    
     
     self.imageView.image = [img currentImage];
     
+    */
+    
+    TKByteImage *img2 = [[TKByteImage alloc] initWithImage:self.workingImage tolerance:0.0 startPoint:CGPointMake(20,60)];
+    
+    self.imageView.image = [img2 indexatedImage];
     
     free(mPixels);
-    free(rawData);
+//    free(rawData);
     
     [self.activity stopAnimating];
 }
 
-
 - (void)TKBurnForX:(int)x andY:(int)y{
     
-    printf("TKBurn x:%d y:%d, index = %d \n", x, y, currentIndex);
-    
-    
+    //printf("TKBurn x:%d y:%d \n", x, y);
     
     
     if (mPixels == NULL) {
@@ -263,15 +328,13 @@ BOOL TKPixelIsBlack(TKPixel pixel){
         return;
     }
     
-    if (mPixels[x][y].red == TKWhite && mPixels[x][y].green == TKWhite && mPixels[x][y].blue == TKWhite) {
+    if (TKPixelIsWhite(mPixels[x][y])) {
         
-        mPixels[x][y].red = 255;
-        mPixels[x][y].green = 0;
-        mPixels[x][y].blue = 0;
+        mPixels[x][y] = TKColorPixelToRed();
         
         [self TKBurnForX:x andY:y-1];
         [self TKBurnForX:x+1 andY:y];
-        [self TKBurnForX:x andY:y+11];
+        [self TKBurnForX:x andY:y+1];
         [self TKBurnForX:x-1 andY:y];
     }
     else{
@@ -279,8 +342,8 @@ BOOL TKPixelIsBlack(TKPixel pixel){
     }
     
 }
+
 - (void)TKDeleteSmallObjets{
-    
     
     NSLog(@"deleting small objects");
     
@@ -289,16 +352,21 @@ BOOL TKPixelIsBlack(TKPixel pixel){
     }
     
     TKPixel **pixels;
-    pixels = calloc(sizeof(TKPixel*), totalWidth);
-    if(mPixels == NULL){NSLog(@"Not enough memory to allocate array.");}
-    for(NSUInteger i = 0; i < totalWidth; i++)
+    
+    NSInteger nrows = [self.workingImage height];
+    NSInteger ncolumns = [self.workingImage width];
+    
+    pixels = calloc(sizeof(TKPixel*), nrows);
+    if(pixels == NULL){NSLog(@"Not enough memory to allocate array.");}
+    for(NSUInteger i = 0; i < nrows; i++)
     {
-        pixels[i] = calloc(sizeof(TKPixel), totalWidth);
-        if(mPixels[i] == NULL){NSLog(@"Not enough memory to allocate array.");}
+        pixels[i] = calloc(sizeof(TKPixel), ncolumns);
+        if(pixels[i] == NULL){NSLog(@"Not enough memory to allocate array.");}
     }
     
-    for (int m=0; m<totalWidth; m++) {
-        for (int n=0; n<totalHeight; n++) {
+    
+    for (int m=0; m<nrows; m++) {
+        for (int n=0; n<ncolumns; n++) {
             pixels[m][n].red = mPixels[m][n].red;
             pixels[m][n].green = mPixels[m][n].green;
             pixels[m][n].blue = mPixels[m][n].blue;
@@ -306,26 +374,92 @@ BOOL TKPixelIsBlack(TKPixel pixel){
         }
     }
     
-    for (int m=0; m<totalWidth; m++) {
-        for (int n=0; n<totalHeight; n++) {
+    for (int m=0; m<nrows; m++) {
+        for (int n=0; n<ncolumns; n++) {
             
-            if (m<totalHeight/2) {
-                if (
-                    TKPixelIsBlack(mPixels[m][n]) 
-                    )
+            if (TKValidCoordinate(m, n, nrows, ncolumns, 1) ) {
+            
+                if (TKPixelIsBlack(mPixels[m][n]) &&
+                         (
+                         TKPixelIsWhite(mPixels[m][n-1]) || 
+                         TKPixelIsWhite(mPixels[m-1][n]) || TKPixelIsWhite(mPixels[m+1][n]) || 
+                         TKPixelIsWhite(mPixels[m][n+1])
+                         )
+                    ) 
                 {
-                    //NSLog(@"whitening pixel : (%d,%d)", m,n);
-                    pixels[m][n].red = 0;
-                    pixels[m][n].green = 0;
-                    pixels[m][n].blue = 255;
+                    pixels[m][n].red = TKWhite;
+                    pixels[m][n].green = TKWhite;
+                    pixels[m][n].blue = TKWhite;
+                    
                 }
             }
         }
     }
     
     
-    for (int m=0; m<totalWidth; m++) {
-        for (int n=0; n<totalHeight; n++) {
+    for (int m=0; m<nrows; m++) {
+        for (int n=0; n<ncolumns; n++) {
+            mPixels[m][n].red = pixels[m][n].red;
+            mPixels[m][n].green = pixels[m][n].green;
+            mPixels[m][n].blue = pixels[m][n].blue;
+            mPixels[m][n].alpha = pixels[m][n].alpha;
+        }
+    }
+    
+    free(pixels);
+
+}
+
+- (void)TKColorizePicture{
+    NSLog(@"colirizint image");
+    
+    if (mPixels == NULL) {
+        return;
+    }
+    
+    TKPixel **pixels;
+    
+    NSInteger nrows = [self.workingImage height];
+    NSInteger ncolumns = [self.workingImage width];
+    
+    pixels = calloc(sizeof(TKPixel*), nrows);
+    if(pixels == NULL){NSLog(@"Not enough memory to allocate array.");}
+    for(NSUInteger i = 0; i < nrows; i++)
+    {
+        pixels[i] = calloc(sizeof(TKPixel), ncolumns);
+        if(pixels[i] == NULL){NSLog(@"Not enough memory to allocate array.");}
+    }
+    
+    
+    for (int m=0; m<nrows; m++) {
+        for (int n=0; n<ncolumns; n++) {
+            pixels[m][n].red = mPixels[m][n].red;
+            pixels[m][n].green = mPixels[m][n].green;
+            pixels[m][n].blue = mPixels[m][n].blue;
+            pixels[m][n].alpha = mPixels[m][n].alpha;
+        }
+    }
+    
+    for (int m=0; m<nrows; m++) {
+        for (int n=0; n<ncolumns; n++) {
+            if (TKPixelIsWhite(mPixels[m][n]) && TKValidCoordinate(m, n, 512, 600, 50)) {
+                
+                pixels[m][n].red = 0;
+                pixels[m][n].green = 255;
+                pixels[m][n].blue = 255;
+                
+                if (TKValidCoordinate(m, n, nrows, ncolumns, 100)) {
+                    pixels[m][n].red = 0;
+                    pixels[m][n].green = 255;
+                    pixels[m][n].blue = 0;
+                }
+            }
+        }
+    }
+    
+    
+    for (int m=0; m<nrows; m++) {
+        for (int n=0; n<ncolumns; n++) {
             mPixels[m][n].red = pixels[m][n].red;
             mPixels[m][n].green = pixels[m][n].green;
             mPixels[m][n].blue = pixels[m][n].blue;
@@ -335,21 +469,89 @@ BOOL TKPixelIsBlack(TKPixel pixel){
     
     free(pixels);
 }
+
 - (void)TKGrowObjets{
+    NSLog(@"growing");
     
+    if (mPixels == NULL) {
+        return;
+    }
+    
+    TKPixel **pixels;
+    
+    NSInteger nrows = [self.workingImage height];
+    NSInteger ncolumns = [self.workingImage width];
+    
+    pixels = calloc(sizeof(TKPixel*), nrows);
+    if(pixels == NULL){NSLog(@"Not enough memory to allocate array.");}
+    for(NSUInteger i = 0; i < nrows; i++)
+    {
+        pixels[i] = calloc(sizeof(TKPixel), ncolumns);
+        if(pixels[i] == NULL){NSLog(@"Not enough memory to allocate array.");}
+    }
+    
+    
+    for (int m=0; m<nrows; m++) {
+        for (int n=0; n<ncolumns; n++) {
+            pixels[m][n].red = mPixels[m][n].red;
+            pixels[m][n].green = mPixels[m][n].green;
+            pixels[m][n].blue = mPixels[m][n].blue;
+            pixels[m][n].alpha = mPixels[m][n].alpha;
+        }
+    }
+    
+    for (int m=0; m<nrows; m++) {
+        for (int n=0; n<ncolumns; n++) {
+            
+            if (TKValidCoordinate(m, n, nrows, ncolumns, 1) ) {
+                
+                if (TKPixelIsBlack(mPixels[m][n]) &&
+                    (
+                     TKPixelIsWhite(mPixels[m][n-1]) || 
+                     TKPixelIsWhite(mPixels[m-1][n]) || TKPixelIsWhite(mPixels[m+1][n]) || 
+                     TKPixelIsWhite(mPixels[m][n+1])
+                     )
+                    ) 
+                {
+                    pixels[m][n].red = TKBlack;
+                    pixels[m][n].green = TKBlack;
+                    pixels[m][n].blue = TKBlack;
+                    
+                }
+            }
+        }
+    }
+    
+    
+    for (int m=0; m<nrows; m++) {
+        for (int n=0; n<ncolumns; n++) {
+            mPixels[m][n].red = pixels[m][n].red;
+            mPixels[m][n].green = pixels[m][n].green;
+            mPixels[m][n].blue = pixels[m][n].blue;
+            mPixels[m][n].alpha = pixels[m][n].alpha;
+        }
+    }
+    
+    free(pixels);
 }
 
-//&&
-//(
-// TKPixelIsWhite(mPixels[m][n-1]) || 
-// TKPixelIsWhite(mPixels[m-1][n]) || TKPixelIsWhite(mPixels[m+1][n]) || 
-// TKPixelIsWhite(mPixels[m][n+1])
-// )
-
-//                    (
-//                    TKPixelIsWhite(mPixels[m-1][n-1]) || TKPixelIsWhite(mPixels[m][n-1]) || TKPixelIsWhite(mPixels[m+1][n-1]) || 
-//                    TKPixelIsWhite(mPixels[m-1][n]) || TKPixelIsWhite(mPixels[m+1][n]) || 
-//                    TKPixelIsWhite(mPixels[m+1][n-1]) || TKPixelIsWhite(mPixels[m][n+1]) || TKPixelIsWhite(mPixels[m+1][n+1])
-//                    )
+- (BOOL)TKWhitePixelsLeft{
+    NSInteger nrows = [self.workingImage height];
+    NSInteger ncolumns = [self.workingImage width];
+    NSInteger whitePixelsLeft = 0;
+    
+    for (int m=0; m<nrows; m++) {
+        for (int n=0; n<ncolumns; n++) {
+            if (TKPixelIsWhite(mPixels[m][n])) {
+                whitePixelsLeft++;
+            }
+        }
+    }
+    
+    if (whitePixelsLeft == 0)
+        return NO;
+    else
+        return YES;
+}
 
 @end

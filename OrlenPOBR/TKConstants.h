@@ -14,3 +14,10 @@ static CGFloat const TKOrlenBlue= 0.067f;
 static CGFloat const kMaxDistance = 0.32f;
 
 typedef unsigned char pixelValue;
+
+typedef struct TKPixel {
+    unsigned char red;
+    unsigned char green;
+    unsigned char blue;
+    unsigned char alpha;
+} TKPixel;

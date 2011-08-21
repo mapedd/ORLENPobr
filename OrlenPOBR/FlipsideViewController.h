@@ -7,21 +7,31 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TKConstants.h"
 
-
-struct TKPixel {
-    unsigned char red;
-    unsigned char green;
-    unsigned char blue;
-    unsigned char alpha;
+struct TKPoint {
+    int x;
+    int y;
 };
 
 
-typedef struct TKPixel TKPixel;
+
+typedef struct TKPoint TKPoint;
+
+TKPoint TKPointMake(int x, int y);
+
+BOOL TKPointIsEqualToPoint(TKPoint p1, TKPoint p2);
 
 BOOL TKPixelIsWhite(TKPixel pixel);
 
 BOOL TKPixelIsBlack(TKPixel pixel);
+
+void TKBurnPixels(TKPixel **pixels, int x, int y);
+
+BOOL TKValidCoordinate(int m,int n, int rows, int columns, int margin);
+
+TKPixel TKColorPixelToRed(void);
+
 
 static unsigned char const TKWhite = 255;
 static unsigned char const TKBlack = 0;
@@ -34,6 +44,9 @@ static unsigned char const TKBlack = 0;
     int totalHeight;
     
     int currentIndex;
+    
+    TKPoint *points;
+    
 }
 
 @property (nonatomic, assign) id <FlipsideViewControllerDelegate> delegate;
@@ -49,6 +62,7 @@ static unsigned char const TKBlack = 0;
 - (void)TKBurnForX:(int)x andY:(int)y;
 - (void)TKDeleteSmallObjets;
 - (void)TKGrowObjets;
+- (BOOL)TKWhitePixelsLeft;
 
 @end
 
