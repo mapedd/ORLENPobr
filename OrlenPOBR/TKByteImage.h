@@ -13,6 +13,8 @@
 #define kMaxSamples	5
 
 
+int RandomUnder(int topPlusOne);
+
 @interface TKByteImage : NSObject {
     pixelValue *imageBytes;
     int _width;
@@ -42,21 +44,46 @@
 	// The stack of line segments we still need to process. When it goes empty
 	//	we're done.
 	NSMutableArray*	mStack;
+    
+    unsigned char wantedRed;
+    unsigned char wantedGreen;
+    unsigned char wantedBlue;
 }
 
 @property (nonatomic, readonly) int width;
 @property (nonatomic, readonly) int height;
 
+@property (nonatomic, assign) unsigned int currentArea;
+
 - (id)initWithImage:(UIImage *)image;
+
 - (id)initWithImage:(UIImage *)image 
           tolerance:(CGFloat)tol 
          startPoint:(CGPoint)point;
+
+- (id)initWithImage:(UIImage *)image
+    backgroundColor:(UIColor *)backgroundColor
+       andTolerance:(CGFloat)tol; 
+
+
+
+- (UIImage *)currentImage;
+- (UIImage *)indexatedImage;
+
+@end
+
+
+@interface TKByteImage (AccessPixels)
 
 - (pixelValue)redPixelAtIndexX:(int)x andY:(int)y;
 - (pixelValue)greenPixelAtIndexX:(int)x andY:(int)y;
 - (pixelValue)bluePixelAtIndexX:(int)x andY:(int)y;
 - (pixelValue)alphaPixelAtIndexX:(int)x andY:(int)y;
-- (UIImage *)currentImage;
-- (UIImage *)indexatedImage;
+
+
+- (void)setRedPixel:(pixelValue)value atIndexX:(int)x andY:(int)y;
+- (void)setGreenPixel:(pixelValue)value atIndexX:(int)x andY:(int)y;
+- (void)setBluePixel:(pixelValue)value atIndexX:(int)x andY:(int)y;
+- (void)setAlphaPixel:(pixelValue)value atIndexX:(int)x andY:(int)y;
 
 @end

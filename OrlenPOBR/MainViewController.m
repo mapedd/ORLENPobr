@@ -113,7 +113,7 @@
     self.picker = [[[UIImagePickerController alloc] init] autorelease];
     [self.picker setDelegate:self];
     
-    self.image.image = [UIImage imageNamed:@"test2.png"];
+    self.image.image = [UIImage imageNamed:@"orlen3.jpg"];
     
 
 }

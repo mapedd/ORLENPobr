@@ -11,7 +11,6 @@
 #import "UIImage+Bytes.h"
 #import "UIColor-Expanded.h"
 #import "TKByteImage.h"
-#import "TKBWImageIndexator.h"
 
 
 BOOL TKPixelIsWhite(TKPixel pixel){
@@ -149,7 +148,7 @@ BOOL TKPointIsEqualToPoint(TKPoint p1, TKPoint p2){
 #pragma mark - 
 
 - (void)findOrlenLogo{
-    /*
+    
     totalWidth = 0;
     totalHeight = 0;
     currentIndex =0;
@@ -298,12 +297,20 @@ BOOL TKPointIsEqualToPoint(TKPoint p1, TKPoint p2){
     TKByteImage *img = [[TKByteImage alloc] initWithImage:imageFromBytes(rawData, width, height)];
     
     self.imageView.image = [img currentImage];
+//    
     
-    */
-    
-    TKByteImage *img2 = [[TKByteImage alloc] initWithImage:self.workingImage tolerance:0.0 startPoint:CGPointMake(20,60)];
-    
-    self.imageView.image = [img2 indexatedImage];
+//    TKByteImage *img2 = [[TKByteImage alloc] initWithImage:self.workingImage
+//                                           backgroundColor:[UIColor whiteColor]
+//                                              andTolerance:0.0f];
+//    
+//    //self.imageView.image = [img2 indexatedImage];
+//    
+//    UIImage *i = [[img2 indexatedImage] retain];
+//    [i release];
+//    
+//    self.imageView.image = [img2 currentImage];
+//    
+//    [img2 release];
     
     free(mPixels);
 //    free(rawData);

@@ -8,6 +8,7 @@
 
 #import "TKByteImage.h"
 #import "UIImage+Bytes.h"
+#import "UIColor-Expanded.h"
 
 // Instead of defining a custom class for line segments that would only be used
 //	in this file, just use NSDictionary and some keys.
@@ -15,12 +16,25 @@
 #define kSegment_Right	@"segmentRight"
 #define kSegment_Y		@"segmentY"
 
+#define TKCGPointNegative CGPointMake(-1, -1)
+
 // We allocate the memory for the image mask here, but the CGImageRef is used
 //	outside of here. So provide a callback to free up the memory after the
 //	caller is done with the CGImageRef.
-static void MaskDataProviderReleaseDataCallback(void *info, const void *data, size_t size)
-{
+static void MaskDataProviderReleaseDataCallback(void *info, const void *data, size_t size){
 	free((void*)data);
+}
+
+int RandomUnder(int topPlusOne){
+    unsigned two31 = 1U << 31;
+    unsigned maxUsable = (two31 / topPlusOne) * topPlusOne;
+    
+    while(1)
+    {
+        unsigned num = arc4random();
+        if(num < maxUsable)
+            return num % topPlusOne;
+    }
 }
 
 @interface TKByteImage (Private)
@@ -35,24 +49,30 @@ static void MaskDataProviderReleaseDataCallback(void *info, const void *data, si
 - (CGImageRef)createMask;
 - (CGImageRef)mask;
 
+- (BOOL)unfilledAreaLeft;
+
+- (CGPoint)whitePixel;
+
 @end
+
 
 @implementation TKByteImage
 
 @synthesize width = _width;
 @synthesize height = _height;
+@synthesize currentArea;
 
 
 - (id)initWithImage:(UIImage *)image{
-    
-    if (image == nil) {
-        return nil;
-    }
     
     self = [super init];
     
     if(!self)
         return nil;
+    
+    if (image == nil) {
+        return nil;
+    }
     
     _width = [image width];
     _height = [image height];
@@ -61,21 +81,6 @@ static void MaskDataProviderReleaseDataCallback(void *info, const void *data, si
     if (self.width == 0 || self.height == 0 || imageBytes == NULL) {
         return nil;
     }
-    
-    
-    return self;
-}
-
-- (id)initWithImage:(UIImage *)image tolerance:(CGFloat)tol startPoint:(CGPoint)point{
-    
-    if (image == nil) {
-        return nil;
-    }
-    
-    self = [super init];
-    
-    if(!self)
-        return nil;
     
     _width = [image width];
     _height = [image height];
@@ -85,35 +90,27 @@ static void MaskDataProviderReleaseDataCallback(void *info, const void *data, si
     if (self.width == 0 || self.height == 0 || imageBytes == NULL) {
         return nil;
     }
-    
-    //NSLog(@"width = %d, height = %d", _width, _height);
     mMaskRowBytes = (_width + 0x0000000F) & ~0x0000000F;
-    //NSLog(@"mMaskRowBytes= %ld", mMaskRowBytes);
     mMaskData = calloc(_height, mMaskRowBytes);
     memset(mMaskData, 0xFF, _height * mMaskRowBytes);
     
     mVisited = calloc(_height * _width, sizeof(BOOL));
+    mStack = [[NSMutableArray alloc] init];
+    
+    
+    return self;
+}
+
+- (id)initWithImage:(UIImage *)image 
+          tolerance:(CGFloat)tol 
+         startPoint:(CGPoint)point{
+
+    self = [self initWithImage:image];
+
     
     mPickedPoint.x = floor(point.x);
     mPickedPoint.y = floor(point.y);
-    
-//    int x=0;
-//    for (int i=0; i<_width*_height; i++) {
-//            pixelValue pixel = imageBytes[x];
-//            NSLog(@"red(%d) = (%d))",i, pixel);
-//        x+=4;
-//    }
-    
-    
-//    for (int i=0; i<_width; i++) {
-//        for (int j=0; j<_height; j++) {
-//            pixelValue red = [self redPixelAtIndexX:i andY:j];
-//            pixelValue green = [self greenPixelAtIndexX:i andY:j];
-//            pixelValue blue = [self bluePixelAtIndexX:i andY:j];
-//            NSLog(@"p(%d,%d) = (%d,%d,%d)",i,j,red,green,blue);
-//        }
-//    }
-    
+
     
     mPickedPixel[0] = [self redPixelAtIndexX:(int)mPickedPoint.x andY:(int)mPickedPoint.y];
     mPickedPixel[1] = [self greenPixelAtIndexX:(int)mPickedPoint.x andY:(int)mPickedPoint.y];
@@ -127,10 +124,64 @@ static void MaskDataProviderReleaseDataCallback(void *info, const void *data, si
         maxSampleValue = (maxSampleValue << 1) | 1;
     
     mTolerance = tol * maxSampleValue;
-    
-    mStack = [[NSMutableArray alloc] init];
+
     
     return self;
+}
+
+- (id)initWithImage:(UIImage *)image
+    backgroundColor:(UIColor *)backgroundColor
+       andTolerance:(CGFloat)tol{
+    
+    self = [self initWithImage:image];
+    
+    if (!self) {
+        return nil;
+    }
+    
+    wantedRed = (unsigned char)[backgroundColor red] * 255;
+    wantedGreen = (unsigned char)[backgroundColor green] * 255;
+    wantedBlue = (unsigned char)[backgroundColor blue] * 255;
+    
+    NSLog(@"wanted rgb = (%d,%d,%d)", wantedRed, wantedGreen, wantedBlue);
+    
+    int bitsPerSample = 32;
+    int maxSampleValue = 0;
+    int i = 0;
+    for (i = 0; i < bitsPerSample; ++i)
+        maxSampleValue = (maxSampleValue << 1) | 1;
+    
+    CGPoint point = CGPointMake(-1, -1);
+    
+    while (point.x<0) {
+//        NSLog(@"while");
+        
+        int randx = RandomUnder(_width);
+        int randy = RandomUnder(_height);
+        
+        if ([self redPixelAtIndexX:randx andY:randy] == wantedRed &&
+            [self greenPixelAtIndexX:randx andY:randy] == wantedGreen && 
+            [self bluePixelAtIndexX:randx andY:randy] == wantedBlue) {
+            point.x = randx;
+            point.y = randy;
+            
+            //NSLog(@"found point = %@", NSStringFromCGPoint(point));
+        }
+    }
+    
+    mPickedPoint.x = floor(point.x);
+    mPickedPoint.y = floor(point.y);
+    
+    mPickedPixel[0] = [self redPixelAtIndexX:mPickedPoint.x andY:mPickedPoint.y];
+    mPickedPixel[1] = [self greenPixelAtIndexX:mPickedPoint.x andY:mPickedPoint.y];
+    mPickedPixel[2] = [self bluePixelAtIndexX:mPickedPoint.x andY:mPickedPoint.y];
+    
+    mTolerance = tol * maxSampleValue;
+    
+    currentArea = 0x7D;
+    
+    return self;
+    
 }
 
 - (void)dealloc{
@@ -138,71 +189,6 @@ static void MaskDataProviderReleaseDataCallback(void *info, const void *data, si
     free(mVisited);
     [mStack release];
     [super dealloc];
-}
-
-- (pixelValue)redPixelAtIndexX:(int)x andY:(int)y{
-    
-    if (x>=self.width || y>=self.height || x < 0 || y < 0) {
-        return 0;
-    }
-    
-    pixelValue red;
-    
-    
-    int row = self.width * y;
-    
-    int column = x;
-    
-    red = imageBytes[(row+column)*4];
-    
-    return red;
-}
-- (pixelValue)greenPixelAtIndexX:(int)x andY:(int)y{
-    
-    if (x>=self.width || y>=self.height || x < 0 || y < 0) {
-        return 0;
-    }
-    
-    pixelValue green;
-    
-    int row = self.width * y;
-    
-    int column = x;
-    
-    green = imageBytes[(row+column)*4+1];
-    
-    return green;
-}
-- (pixelValue)bluePixelAtIndexX:(int)x andY:(int)y{
-    
-    if (x>=self.width || y>=self.height || x < 0 || y < 0) {
-        return 0;
-    }
-    
-    pixelValue blue;
-    
-    int row = self.width * y;
-    
-    int column = x;
-    
-    blue = imageBytes[(row+column)*4+2];
-    
-    return blue;
-}
-- (pixelValue)alphaPixelAtIndexX:(int)x andY:(int)y{
-    if (x>=self.width || y>=self.height || x < 0 || y < 0) {
-        return 0;
-    }
-    
-    pixelValue blue;
-    
-    int row = self.width * y;
-    
-    int column = x;
-    
-    blue = imageBytes[row+column*4+3];
-    
-    return blue;
 }
 
 - (UIImage *)currentImage{
@@ -221,27 +207,88 @@ static void MaskDataProviderReleaseDataCallback(void *info, const void *data, si
     return image;
 }
 
+- (BOOL)unfilledAreaLeft{
+    BOOL whitePixelsLeft = NO;
+    
+    for (int i = 0; i<_width; i++) 
+    {
+        for (int j = 0; j<_height; j++) 
+        {
+            if (wantedRed == [self redPixelAtIndexX:i andY:j] &&
+                wantedGreen == [self greenPixelAtIndexX:i andY:j] &&
+                wantedBlue == [self bluePixelAtIndexX:i andY:j]) 
+            {
+                whitePixelsLeft = YES;
+                break;
+            }
+        }
+    }
+    
+    return whitePixelsLeft;
+}
+
 - (CGImageRef) mask{
 	// Prime the loop so we have something on the stack. searcLineAtPoint
 	//	will look both to the right and left for pixels that match the 
 	//	selected color. It will then throw that line segment onto the stack.
-	[self searchLineAtPoint:mPickedPoint];
+	
 	
 	// While the stack isn't empty, continue to process line segments that
 	//	are on the stack.
-	while ( [mStack count] > 0 ) {
-        //NSLog(@"mStack count = %d", [mStack count]);
-		// Pop the top segment off the stack
-		NSDictionary* segment = [[[mStack lastObject] retain] autorelease];
-		[mStack removeLastObject];
-		
-		// Process the segment, by looking both above and below it for pixels
-		//	that match the user picked pixel
-		[self processSegment:segment];
-	}
+    int i = 1;
+	while ([self unfilledAreaLeft]) {
+        NSLog(@"area number %d", i++);
+        [self searchLineAtPoint:mPickedPoint];
+        
+        while ( [mStack count] > 0 ) {
+            //NSLog(@"mStack count = %d", [mStack count]);
+            // Pop the top segment off the stack
+            NSDictionary* segment = [[[mStack lastObject] retain] autorelease];
+            [mStack removeLastObject];
+            
+            // Process the segment, by looking both above and below it for pixels
+            //	that match the user picked pixel
+            [self processSegment:segment];
+        }
+        
+        CGPoint point = [self whitePixel];
+        
+        if (CGPointEqualToPoint(TKCGPointNegative, point)) {
+            break;
+        }
+        
+        mPickedPoint.x = floor(point.x);
+        mPickedPoint.y = floor(point.y);
+        
+        mPickedPixel[0] = [self redPixelAtIndexX:mPickedPoint.x andY:mPickedPoint.y];
+        mPickedPixel[1] = [self greenPixelAtIndexX:mPickedPoint.x andY:mPickedPoint.y];
+        mPickedPixel[2] = [self bluePixelAtIndexX:mPickedPoint.x andY:mPickedPoint.y];
+        
+        currentArea+=0xF0;
+    }
 	
 	// We're done, so convert our mask data into a real mask
 	return [self createMask];
+}
+
+- (CGPoint)whitePixel{
+    CGPoint whitePoint = TKCGPointNegative;
+    
+    for (int i = 0; i<_width; i++) 
+    {
+        for (int j = 0; j<_height; j++) 
+        {
+            if (wantedRed == [self redPixelAtIndexX:i andY:j] &&
+                wantedGreen == [self greenPixelAtIndexX:i andY:j] &&
+                wantedBlue == [self bluePixelAtIndexX:i andY:j]) 
+            {
+                whitePoint = CGPointMake(i, j);
+                break;
+            }
+        }
+    }
+    
+    return whitePoint;
 }
 
 - (void)searchLineAtPoint:(CGPoint)point{
@@ -258,7 +305,7 @@ static void MaskDataProviderReleaseDataCallback(void *info, const void *data, si
 	//	the point is in bounds, and that the specified point hasn't already
 	//	been visited.
     
-   // NSLog(@"search line at point = %@", NSStringFromCGPoint(point));
+//   NSLog(@"search line at point = %@", NSStringFromCGPoint(point));
     
 	if ( (point.y < 0) || (point.y >= _height) || (point.x < 0) || (point.x >= _width) )
 		return;
@@ -326,6 +373,20 @@ static void MaskDataProviderReleaseDataCallback(void *info, const void *data, si
 		// Now actually mark the mask
 		unsigned char* maskRow = mMaskData + (mMaskRowBytes * (long)point.y);
 		maskRow[(long)point.x] = 0x00; // all on
+        
+        [self setRedPixel:currentArea 
+                 atIndexX:(int)point.x 
+                     andY:(int)point.y];
+        
+        [self setGreenPixel:currentArea 
+                   atIndexX:(int)point.x 
+                       andY:(int)point.y];
+        
+        [self setBluePixel:currentArea 
+                  atIndexX:(int)point.x 
+                      andY:(int)point.y];
+        
+        
 	}
     else{
         //NSLog(@"point %@ is bad", NSStringFromCGPoint(point));
@@ -367,7 +428,8 @@ static void MaskDataProviderReleaseDataCallback(void *info, const void *data, si
     pixel[3] = [self alphaPixelAtIndexX:(int)point.x andY:(int)point.y];
     
     
-    //NSLog(@"pixel%@ = (%d,%d,%d)", NSStringFromCGPoint(point), pixel[0],pixel[1],pixel[2]);
+//    NSLog(@"        pixel%@ = (%d,%d,%d)", NSStringFromCGPoint(point), pixel[0],pixel[1],pixel[2]);
+//    NSLog(@"picked  pixel%@ = (%d,%d,%d)", NSStringFromCGPoint(mPickedPoint), mPickedPixel[0],mPickedPixel[1],mPickedPixel[2]);
 	
 	// Determine the largest difference in the pixel components. Note that we
 	//	assume the alpha channel is the last component, and we skip it.
@@ -404,25 +466,6 @@ static void MaskDataProviderReleaseDataCallback(void *info, const void *data, si
 	}
 }
 
-//- (CGImageRef)createMask{
-//    
-//	// Gotta have a data provider to wrap our raw pixels. Provide a callback
-//	//	for the mask data to be freed. Note that we don't free mMaskData in our
-//	//	dealloc on purpose.
-//	CGDataProviderRef provider = CGDataProviderCreateWithData(nil, mMaskData, mMaskRowBytes * _height, &MaskDataProviderReleaseDataCallback);
-///*    CGDataProviderCreateWithData(<#void *info#>, <#const void *data#>, <#size_t size#>, <#CGDataProviderReleaseDataCallback releaseData#>)*/
-//	
-//	CGImageRef mask = CGImageMaskCreate(_width,_height, 8, 8, mMaskRowBytes, provider, nil, true);
-///*	CGImageMaskCreate(<#size_t width#>, <#size_t height#>, <#size_t bitsPerComponent#>, <#size_t bitsPerPixel#>, <#size_t bytesPerRow#>, <#CGDataProviderRef provider#>, <#const CGFloat *decode#>, <#_Bool shouldInterpolate#>)*/
-//	CGDataProviderRelease(provider);
-//    
-//    return mask;
-//    
-////    UIImage *mask = imageFromBytes(mMaskData, _width, _height);
-////    
-////	return mask.CGImage;
-//}
-
 - (CGImageRef)createMask{
     
     NSUInteger bytesPerPixel = 1;
@@ -445,5 +488,120 @@ static void MaskDataProviderReleaseDataCallback(void *info, const void *data, si
     CGImageRef imageRef = CGBitmapContextCreateImage (ctx);  
     return imageRef;
 }
+
+@end
+
+@implementation TKByteImage (AccessPixels)
+
+
+- (pixelValue)redPixelAtIndexX:(int)x andY:(int)y{
+    
+    if (x>=self.width || y>=self.height || x < 0 || y < 0) {
+        return 0;
+    }
+    
+    pixelValue red;
+    
+    
+    int row = self.width * y;
+    
+    int column = x;
+    
+    red = imageBytes[(row+column)*4];
+    
+    return red;
+}
+- (pixelValue)greenPixelAtIndexX:(int)x andY:(int)y{
+    
+    if (x>=self.width || y>=self.height || x < 0 || y < 0) {
+        return 0;
+    }
+    
+    pixelValue green;
+    
+    int row = self.width * y;
+    
+    int column = x;
+    
+    green = imageBytes[(row+column)*4+1];
+    
+    return green;
+}
+- (pixelValue)bluePixelAtIndexX:(int)x andY:(int)y{
+    
+    if (x>=self.width || y>=self.height || x < 0 || y < 0) {
+        return 0;
+    }
+    
+    pixelValue blue;
+    
+    int row = self.width * y;
+    
+    int column = x;
+    
+    blue = imageBytes[(row+column)*4+2];
+    
+    return blue;
+}
+- (pixelValue)alphaPixelAtIndexX:(int)x andY:(int)y{
+    if (x>=self.width || y>=self.height || x < 0 || y < 0) {
+        return 0;
+    }
+    
+    pixelValue blue;
+    
+    int row = self.width * y;
+    
+    int column = x;
+    
+    blue = imageBytes[row+column*4+3];
+    
+    return blue;
+}
+
+- (void)setRedPixel:(pixelValue)value atIndexX:(int)x andY:(int)y{
+    
+    if (x>=self.width || y>=self.height || x < 0 || y < 0) 
+        return;
+    
+    int row = self.width * y;
+    
+    int column = x;
+    
+    imageBytes[(row+column)*4] = value;
+    
+}
+- (void)setGreenPixel:(pixelValue)value atIndexX:(int)x andY:(int)y{
+    
+    if (x>=self.width || y>=self.height || x < 0 || y < 0) {
+        return;
+    }
+    int row = self.width * y;
+    
+    int column = x;
+    
+    imageBytes[(row+column)*4+1] = value;
+}
+- (void)setBluePixel:(pixelValue)value atIndexX:(int)x andY:(int)y{
+    
+    if (x>=self.width || y>=self.height || x < 0 || y < 0)
+        return;
+    
+    int row = self.width * y;
+    
+    int column = x;
+    
+    imageBytes[(row+column)*4+2] = value;
+}
+- (void)setAlphaPixel:(pixelValue)value atIndexX:(int)x andY:(int)y{
+    if (x>=self.width || y>=self.height || x < 0 || y < 0)
+        return;
+    int row = self.width * y;
+    
+    int column = x;
+    
+    imageBytes[(row+column)*4+3] = value;
+}
+
 
 @end
