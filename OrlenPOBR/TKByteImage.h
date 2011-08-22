@@ -73,6 +73,7 @@ pixelValue blueValueForIndex(int index);
 
 - (UIImage *)currentImage;
 - (UIImage *)indexatedImage;
+- (void)findLetter:(NSString *)letter;
 
 @end
 

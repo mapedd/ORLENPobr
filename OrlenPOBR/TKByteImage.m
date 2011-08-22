@@ -502,10 +502,17 @@ int RandomUnder(int topPlusOne){
     return imageRef;
 }
 
+- (void)findLetter:(NSString *)letter{
+    if ([letter length]!=1) {
+        return;
+    }
+    
+    
+}
+
 @end
 
 @implementation TKByteImage (AccessPixels)
-
 
 - (pixelValue)redPixelAtIndexX:(int)x andY:(int)y{
     
@@ -615,6 +622,5 @@ int RandomUnder(int topPlusOne){
     
     imageBytes[(row+column)*4+3] = value;
 }
-
 
 @end

@@ -310,6 +310,10 @@ BOOL TKPointIsEqualToPoint(TKPoint p1, TKPoint p2){
     
     self.imageView.image = [img2 currentImage];
     
+    [img2 findLetter:@"O"];
+    
+    self.imageView.image = [img2 currentImage];
+    
     [img2 release];
     
     free(mPixels);

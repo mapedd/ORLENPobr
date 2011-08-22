@@ -17,6 +17,8 @@
 		04489B3E139554D10036B080 /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04489B3A139554D10036B080 /* Quincy.bundle */; };
 		045611D7139582E500F35301 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 045611D6139582E500F35301 /* Default-Landscape.png */; };
 		045611DA1395830E00F35301 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 045611D91395830D00F35301 /* Default.png */; };
+		04751DE71402F45100A3CCCD /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 04751DE61402F45100A3CCCD /* Default-Portrait~ipad.png */; };
+		04751DE91402F45E00A3CCCD /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 04751DE81402F45E00A3CCCD /* Default-Landscape~ipad.png */; };
 		0487F341138DBA0F00E614D0 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 0487F340138DBA0F00E614D0 /* UIColor-Expanded.m */; };
 		04881607138D9CE900022C1F /* UIImage+Bytes.m in Sources */ = {isa = PBXBuildFile; fileRef = 04881606138D9CE900022C1F /* UIImage+Bytes.m */; };
 		0488163F138DAAE700022C1F /* BWApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 04881625138DAAE700022C1F /* BWApp.m */; };
@@ -89,6 +91,8 @@
 		04489B3A139554D10036B080 /* Quincy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Quincy.bundle; path = QuincyKit/Quincy.bundle; sourceTree = "<group>"; };
 		045611D6139582E500F35301 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		045611D91395830D00F35301 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		04751DE61402F45100A3CCCD /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		04751DE81402F45E00A3CCCD /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		0487F33F138DBA0F00E614D0 /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-Expanded.h"; sourceTree = "<group>"; };
 		0487F340138DBA0F00E614D0 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Expanded.m"; sourceTree = "<group>"; };
 		04881605138D9CE900022C1F /* UIImage+Bytes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Bytes.h"; sourceTree = "<group>"; };
@@ -264,6 +268,8 @@
 		04965F4A1389A3A60032ADD8 = {
 			isa = PBXGroup;
 			children = (
+				04751DE81402F45E00A3CCCD /* Default-Landscape~ipad.png */,
+				04751DE61402F45100A3CCCD /* Default-Portrait~ipad.png */,
 				045611D91395830D00F35301 /* Default.png */,
 				045611D6139582E500F35301 /* Default-Landscape.png */,
 				04AEB1261389B34F00282CBA /* icon.png */,
@@ -471,6 +477,8 @@
 				0438C25413E73836002A48D3 /* test.png in Resources */,
 				0438C25713E739C3002A48D3 /* test2.png in Resources */,
 				04DF4ADF13E86257009534CD /* test3.png in Resources */,
+				04751DE71402F45100A3CCCD /* Default-Portrait~ipad.png in Resources */,
+				04751DE91402F45E00A3CCCD /* Default-Landscape~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
