@@ -15,6 +15,10 @@
 
 int RandomUnder(int topPlusOne);
 
+pixelValue redValueForIndex(int index);
+pixelValue greenValueForIndex(int index);
+pixelValue blueValueForIndex(int index);
+
 @interface TKByteImage : NSObject {
     pixelValue *imageBytes;
     int _width;

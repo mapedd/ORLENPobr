@@ -292,28 +292,28 @@ BOOL TKPointIsEqualToPoint(TKPoint p1, TKPoint p2){
     }
     
     
-    self.imageView.image = nil;
-   
-    TKByteImage *img = [[TKByteImage alloc] initWithImage:imageFromBytes(rawData, width, height)];
+//    self.imageView.image = nil;
+//   
+//    TKByteImage *img = [[TKByteImage alloc] initWithImage:imageFromBytes(rawData, width, height)];
+//    
+//    self.imageView.image = [img currentImage];
+//    
+//    [img release];
+
     
-    self.imageView.image = [img currentImage];
-//    
+    TKByteImage *img2 = [[TKByteImage alloc] initWithImage:imageFromBytes(rawData, width, height)
+                                           backgroundColor:[UIColor whiteColor]
+                                              andTolerance:0.0f];
     
-//    TKByteImage *img2 = [[TKByteImage alloc] initWithImage:self.workingImage
-//                                           backgroundColor:[UIColor whiteColor]
-//                                              andTolerance:0.0f];
-//    
-//    //self.imageView.image = [img2 indexatedImage];
-//    
-//    UIImage *i = [[img2 indexatedImage] retain];
-//    [i release];
-//    
-//    self.imageView.image = [img2 currentImage];
-//    
-//    [img2 release];
+    UIImage *i = [[img2 indexatedImage] retain];
+    [i release];
+    
+    self.imageView.image = [img2 currentImage];
+    
+    [img2 release];
     
     free(mPixels);
-//    free(rawData);
+    free(rawData);
     
     [self.activity stopAnimating];
 }

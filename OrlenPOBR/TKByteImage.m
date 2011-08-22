@@ -25,6 +25,30 @@ static void MaskDataProviderReleaseDataCallback(void *info, const void *data, si
 	free((void*)data);
 }
 
+pixelValue redValueForIndex(int index){
+    pixelValue pix;
+    
+    pix = 255-index;
+    
+    return pix;
+}
+
+pixelValue greenValueForIndex(int index){
+    pixelValue pix;
+    
+    pix = 10+index;
+    
+    return pix;
+}
+
+pixelValue blueValueForIndex(int index){
+    pixelValue pix;
+    
+    pix = 200-index;
+    
+    return pix;
+}
+
 int RandomUnder(int topPlusOne){
     unsigned two31 = 1U << 31;
     unsigned maxUsable = (two31 / topPlusOne) * topPlusOne;
@@ -153,20 +177,11 @@ int RandomUnder(int topPlusOne){
     
     CGPoint point = CGPointMake(-1, -1);
     
-    while (point.x<0) {
-//        NSLog(@"while");
-        
-        int randx = RandomUnder(_width);
-        int randy = RandomUnder(_height);
-        
-        if ([self redPixelAtIndexX:randx andY:randy] == wantedRed &&
-            [self greenPixelAtIndexX:randx andY:randy] == wantedGreen && 
-            [self bluePixelAtIndexX:randx andY:randy] == wantedBlue) {
-            point.x = randx;
-            point.y = randy;
-            
-            //NSLog(@"found point = %@", NSStringFromCGPoint(point));
-        }
+    point = [self whitePixel];
+    
+    if (CGPointEqualToPoint(point, TKCGPointNegative)) {
+        NSLog(@"no white points");
+        return nil;
     }
     
     mPickedPoint.x = floor(point.x);
@@ -235,9 +250,7 @@ int RandomUnder(int topPlusOne){
 	
 	// While the stack isn't empty, continue to process line segments that
 	//	are on the stack.
-    int i = 1;
 	while ([self unfilledAreaLeft]) {
-        NSLog(@"area number %d", i++);
         [self searchLineAtPoint:mPickedPoint];
         
         while ( [mStack count] > 0 ) {
@@ -374,15 +387,15 @@ int RandomUnder(int topPlusOne){
 		unsigned char* maskRow = mMaskData + (mMaskRowBytes * (long)point.y);
 		maskRow[(long)point.x] = 0x00; // all on
         
-        [self setRedPixel:currentArea 
+        [self setRedPixel:redValueForIndex(currentArea) 
                  atIndexX:(int)point.x 
                      andY:(int)point.y];
         
-        [self setGreenPixel:currentArea 
+        [self setGreenPixel:greenValueForIndex(currentArea)
                    atIndexX:(int)point.x 
                        andY:(int)point.y];
         
-        [self setBluePixel:currentArea 
+        [self setBluePixel:blueValueForIndex(currentArea) 
                   atIndexX:(int)point.x 
                       andY:(int)point.y];
         
