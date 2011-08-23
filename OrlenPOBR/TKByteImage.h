@@ -19,6 +19,8 @@ pixelValue redValueForIndex(int index);
 pixelValue greenValueForIndex(int index);
 pixelValue blueValueForIndex(int index);
 
+@protocol TKByteImageDelegate;
+
 @interface TKByteImage : NSObject {
     pixelValue *imageBytes;
     int _width;
@@ -57,6 +59,8 @@ pixelValue blueValueForIndex(int index);
 @property (nonatomic, readonly) int width;
 @property (nonatomic, readonly) int height;
 
+@property (nonatomic, assign) id<TKByteImageDelegate> delegate;
+
 @property (nonatomic, assign) unsigned int currentArea;
 
 - (id)initWithImage:(UIImage *)image;
@@ -73,7 +77,17 @@ pixelValue blueValueForIndex(int index);
 
 - (UIImage *)currentImage;
 - (UIImage *)indexatedImage;
-- (void)findLetter:(NSString *)letter;
+
+- (UIImage *)imageWithMarkedCharacters;
+
+- (void)analyze;
+
+@end
+
+
+@protocol TKByteImageDelegate <NSObject>
+
+- (void)imageAnalyzed:(TKByteImage *)byteImage;
 
 @end
 

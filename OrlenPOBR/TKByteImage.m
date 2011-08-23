@@ -28,7 +28,7 @@ static void MaskDataProviderReleaseDataCallback(void *info, const void *data, si
 pixelValue redValueForIndex(int index){
     pixelValue pix;
     
-    pix = 255-index;
+    pix = 232-3*index;
     
     return pix;
 }
@@ -36,7 +36,7 @@ pixelValue redValueForIndex(int index){
 pixelValue greenValueForIndex(int index){
     pixelValue pix;
     
-    pix = 10+index;
+    pix = 10+2*index;
     
     return pix;
 }
@@ -44,7 +44,7 @@ pixelValue greenValueForIndex(int index){
 pixelValue blueValueForIndex(int index){
     pixelValue pix;
     
-    pix = 200-index;
+    pix = 100-4*index;
     
     return pix;
 }
@@ -86,6 +86,7 @@ int RandomUnder(int topPlusOne){
 @synthesize height = _height;
 @synthesize currentArea;
 
+@synthesize delegate = _delegate;
 
 - (id)initWithImage:(UIImage *)image{
     
@@ -193,7 +194,7 @@ int RandomUnder(int topPlusOne){
     
     mTolerance = tol * maxSampleValue;
     
-    currentArea = 0x7D;
+    currentArea = 1;
     
     return self;
     
@@ -277,8 +278,10 @@ int RandomUnder(int topPlusOne){
         mPickedPixel[1] = [self greenPixelAtIndexX:mPickedPoint.x andY:mPickedPoint.y];
         mPickedPixel[2] = [self bluePixelAtIndexX:mPickedPoint.x andY:mPickedPoint.y];
         
-        currentArea+=0xF0;
+        currentArea++;
     }
+    
+    NSLog(@"%d areas found", currentArea);
 	
 	// We're done, so convert our mask data into a real mask
 	return [self createMask];
@@ -502,12 +505,122 @@ int RandomUnder(int topPlusOne){
     return imageRef;
 }
 
-- (void)findLetter:(NSString *)letter{
-    if ([letter length]!=1) {
-        return;
+- (void)analyze{
+    [self performSelectorInBackground:@selector(backgroundAnalyze) withObject:nil];
+}
+
+- (void)backgroundAnalyze{
+    CGFloat m00, m01, m10,m11, m20, m02;
+    CGFloat M20,M02, M11;
+    CGFloat M1, M7;
+    
+    pixelValue redIndex;
+    pixelValue greenIndex; 
+    pixelValue blueIndex;
+    
+    int areaIndex = 1;
+    
+    for (int i=1; i<currentArea; i++) {
+        redIndex = redValueForIndex(i);
+        greenIndex = greenValueForIndex(i);
+        blueIndex = blueValueForIndex(i);
+        
+        //NSLog(@"wanted color = (%d,%d,%d) at index %d", redIndex, greenIndex, blueIndex, i);
+        
+        
+        m00=0.0f;
+        m01=0.0f;
+        m10=0.0f;
+        m11=0.0f;
+        m20=0.0f;
+        m02=0.0f;
+        M20=0.0f;
+        M02=0.0f;
+        M11=0.0f;
+        M1 =0.0f;
+        M7 =0.0f;
+        
+        /*
+         
+         m00 = ΣΣf(x,y)
+         m01 = ΣΣ y f(x,y)
+         m10 = ΣΣ x f(x,y)
+         m11 = ΣΣ x y
+         m02 = ΣΣ y^2
+         m20 = ΣΣ x^2
+         
+         M20 = m20-m10^2/m00
+         M02 = m02-m01^2/m00
+         M11 = m11-m10*m01/m00
+         
+         
+         M1 = {M20+M02}/m00^2
+         
+         M7 = {M20*M02-M11^2}/m00^4
+         
+         
+         */
+        
+        for (int x=0; x<_width; x++) {
+            for (int y=0; y<_height; y++) {
+                if (redIndex == [self redPixelAtIndexX:x andY:y] &&
+                    greenIndex == [self greenPixelAtIndexX:x andY:y] &&
+                    blueIndex == [self bluePixelAtIndexX:x andY:y] ) 
+                {
+                    m00++;
+                    m01+=y;
+                    m10+=x;
+                    m11+=x*y;
+                    m20+=x*x;
+                    m02+=y*y;
+                }
+            }
+        }
+        
+       
+        if (m00>200.0f) {
+            
+            areaIndex+=20;
+            
+            M20 = m20-(m10*m10)/m00;
+            
+            M02 = m02-(m01*m01)/m00;
+            
+            M11 = m11-(m10*m01)/m00;
+            
+            
+            M1 = (M20+M02)/(m00*m00);
+            
+            M7 = (M20*M02-M11*M11)/(m00*m00*m00*m00);
+            
+            NSLog(@"M1 = %f, M7 = %f, area (S=%f) index = %d",M1, M7, m00 ,i);
+            
+            
+            for (int x=0; x<_width; x++) {
+                for (int y=0; y<_height; y++) {
+                    if (redIndex == [self redPixelAtIndexX:x andY:y] &&
+                        greenIndex == [self greenPixelAtIndexX:x andY:y] &&
+                        blueIndex == [self bluePixelAtIndexX:x andY:y] ) {
+                        
+                        [self setRedPixel:areaIndex atIndexX:x andY:y];
+                        [self setGreenPixel:areaIndex atIndexX:x andY:y];
+                        [self setBluePixel:areaIndex atIndexX:x andY:y];
+                    }
+                    
+                }
+            }
+        }
+        
+        
+        
     }
     
-    
+    [self.delegate performSelectorOnMainThread:@selector(imageAnalyzed:) withObject:self waitUntilDone:NO];
+}
+
+- (UIImage *)imageWithMarkedCharacters{
+    UIImage *image;
+    return image;
 }
 
 @end

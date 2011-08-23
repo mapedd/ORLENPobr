@@ -305,21 +305,24 @@ BOOL TKPointIsEqualToPoint(TKPoint p1, TKPoint p2){
                                            backgroundColor:[UIColor whiteColor]
                                               andTolerance:0.0f];
     
+    img2.delegate = (id<TKByteImageDelegate>)self;
+    
     UIImage *i = [[img2 indexatedImage] retain];
     [i release];
     
     self.imageView.image = [img2 currentImage];
     
-    [img2 findLetter:@"O"];
+    [img2 analyze];
     
-    self.imageView.image = [img2 currentImage];
-    
-    [img2 release];
-    
-    free(mPixels);
     free(rawData);
     
     [self.activity stopAnimating];
+}
+
+- (void)imageAnalyzed:(TKByteImage *)byteImage{
+    self.imageView.image = [byteImage currentImage];
+    [byteImage release];
+    free(mPixels);
 }
 
 - (void)TKBurnForX:(int)x andY:(int)y{
