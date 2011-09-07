@@ -62,9 +62,14 @@
 		04AAD5711394230B008F464B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAD56D1394230B008F464B /* ImageIO.framework */; };
 		04AAD5721394230B008F464B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAD56E1394230B008F464B /* CFNetwork.framework */; };
 		04AEB1271389B34F00282CBA /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AEB1261389B34F00282CBA /* icon.png */; };
+		04B14332140A514800710CFE /* orlen4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04B14330140A514800710CFE /* orlen4.jpg */; };
+		04B14333140A514800710CFE /* orlen5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04B14331140A514800710CFE /* orlen5.jpg */; };
+		04B14336140A6A2A00710CFE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B14335140A6A2A00710CFE /* Default@2x.png */; };
 		04CC302F13A26F7500BCBEE3 /* orlen1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04CC302C13A26F7500BCBEE3 /* orlen1.jpg */; };
 		04CC303013A26F7500BCBEE3 /* orlen2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04CC302D13A26F7500BCBEE3 /* orlen2.jpg */; };
 		04CC303113A26F7500BCBEE3 /* orlen3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04CC302E13A26F7500BCBEE3 /* orlen3.jpg */; };
+		04CE43F01417F5F7004E69EE /* orlen6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04CE43EF1417F5F7004E69EE /* orlen6.jpg */; };
+		04CE43F31417F6A3004E69EE /* orlen7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04CE43F21417F6A3004E69EE /* orlen7.jpg */; };
 		04DF4ADF13E86257009534CD /* test3.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DF4ADE13E86257009534CD /* test3.png */; };
 /* End PBXBuildFile section */
 
@@ -161,10 +166,15 @@
 		04AAD56E1394230B008F464B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		04AAD56F1394230B008F464B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		04AEB1261389B34F00282CBA /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		04B14330140A514800710CFE /* orlen4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = orlen4.jpg; sourceTree = "<group>"; };
+		04B14331140A514800710CFE /* orlen5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = orlen5.jpg; sourceTree = "<group>"; };
+		04B14335140A6A2A00710CFE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		04BD366213C3AE1F001E8BF3 /* NonRecursiveFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonRecursiveFill.h; sourceTree = "<group>"; };
 		04CC302C13A26F7500BCBEE3 /* orlen1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = orlen1.jpg; path = ../../orlen1.jpg; sourceTree = "<group>"; };
 		04CC302D13A26F7500BCBEE3 /* orlen2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = orlen2.jpg; path = ../../orlen2.jpg; sourceTree = "<group>"; };
 		04CC302E13A26F7500BCBEE3 /* orlen3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = orlen3.jpg; path = ../../orlen3.jpg; sourceTree = "<group>"; };
+		04CE43EF1417F5F7004E69EE /* orlen6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = orlen6.jpg; sourceTree = "<group>"; };
+		04CE43F21417F6A3004E69EE /* orlen7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = orlen7.jpg; sourceTree = "<group>"; };
 		04DF4ADE13E86257009534CD /* test3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -272,6 +282,7 @@
 				04751DE61402F45100A3CCCD /* Default-Portrait~ipad.png */,
 				045611D91395830D00F35301 /* Default.png */,
 				045611D6139582E500F35301 /* Default-Landscape.png */,
+				04B14335140A6A2A00710CFE /* Default@2x.png */,
 				04AEB1261389B34F00282CBA /* icon.png */,
 				04965F5F1389A3A60032ADD8 /* OrlenPOBR */,
 				04965F831389A3A70032ADD8 /* OrlenPOBRTests */,
@@ -349,6 +360,10 @@
 				04CC302C13A26F7500BCBEE3 /* orlen1.jpg */,
 				04CC302D13A26F7500BCBEE3 /* orlen2.jpg */,
 				04CC302E13A26F7500BCBEE3 /* orlen3.jpg */,
+				04B14330140A514800710CFE /* orlen4.jpg */,
+				04B14331140A514800710CFE /* orlen5.jpg */,
+				04CE43EF1417F5F7004E69EE /* orlen6.jpg */,
+				04CE43F21417F6A3004E69EE /* orlen7.jpg */,
 				04965F611389A3A60032ADD8 /* OrlenPOBR-Info.plist */,
 				04489B3A139554D10036B080 /* Quincy.bundle */,
 				04965F621389A3A60032ADD8 /* InfoPlist.strings */,
@@ -479,6 +494,11 @@
 				04DF4ADF13E86257009534CD /* test3.png in Resources */,
 				04751DE71402F45100A3CCCD /* Default-Portrait~ipad.png in Resources */,
 				04751DE91402F45E00A3CCCD /* Default-Landscape~ipad.png in Resources */,
+				04B14332140A514800710CFE /* orlen4.jpg in Resources */,
+				04B14333140A514800710CFE /* orlen5.jpg in Resources */,
+				04B14336140A6A2A00710CFE /* Default@2x.png in Resources */,
+				04CE43F01417F5F7004E69EE /* orlen6.jpg in Resources */,
+				04CE43F31417F6A3004E69EE /* orlen7.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

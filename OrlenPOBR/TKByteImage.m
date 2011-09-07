@@ -201,8 +201,10 @@ int RandomUnder(int topPlusOne){
 }
 
 - (void)dealloc{
+    NSLog(@"dealloc TKByteImage");
     free(imageBytes);
     free(mVisited);
+    free(mMaskData);
     [mStack release];
     [super dealloc];
 }
@@ -501,7 +503,7 @@ int RandomUnder(int topPlusOne){
         return nil;
     }
     
-    CGImageRef imageRef = CGBitmapContextCreateImage (ctx);  
+    CGImageRef imageRef = NULL;//CGBitmapContextCreateImage (ctx);  
     return imageRef;
 }
 
@@ -510,13 +512,26 @@ int RandomUnder(int topPlusOne){
 }
 
 - (void)backgroundAnalyze{
+    
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     CGFloat m00, m01, m10,m11, m20, m02;
     CGFloat M20,M02, M11;
     CGFloat M1, M7;
     
+    NSInteger minX,maxX;
+    NSInteger minY,maxY;
+    
+    minX = _width;
+    maxX = 0;
+    minY = _height;
+    maxY = 0;
+    
     pixelValue redIndex;
     pixelValue greenIndex; 
     pixelValue blueIndex;
+    
+    UIColor *yellowColor = [UIColor yellowColor];
     
     int areaIndex = 1;
     
@@ -539,6 +554,11 @@ int RandomUnder(int topPlusOne){
         M11=0.0f;
         M1 =0.0f;
         M7 =0.0f;
+        
+        minX = _width;
+        maxX = 0;
+        minY = _height;
+        maxY = 0;
         
         /*
          
@@ -573,12 +593,23 @@ int RandomUnder(int topPlusOne){
                     m11+=x*y;
                     m20+=x*x;
                     m02+=y*y;
+                    
+                    
+                    if (minX>x)
+                        minX = x;
+                    if (maxX<x)
+                        maxX = x;
+                    if (minY>y)
+                        minY = y;
+                    if (maxY<y)
+                        maxY = y;
+                    
                 }
             }
         }
         
        
-        if (m00>200.0f) {
+        if (m00>200.0f && maxX-minX != _width) {
             
             areaIndex+=20;
             
@@ -594,7 +625,13 @@ int RandomUnder(int topPlusOne){
             M7 = (M20*M02-M11*M11)/(m00*m00*m00*m00);
             
             NSLog(@"M1 = %f, M7 = %f, area (S=%f) index = %d",M1, M7, m00 ,i);
+            NSLog(@"minX = %d, maxX= = %d, minY = %d, maxY = %d",minX, maxX, minY, maxY);
             
+            CGRect boundingRect = CGRectMake(minX, minY, maxX-minX, maxY-minY);
+//            CGRect boundingRect = CGRectMake(10, 10, 200, 200);
+            
+//            [self drawRectInBytes:boundingRect withColor:yellowColor];
+            [self drawRectInBytes:boundingRect withColor:yellowColor andMarkIndex:i];
             
             for (int x=0; x<_width; x++) {
                 for (int y=0; y<_height; y++) {
@@ -609,11 +646,15 @@ int RandomUnder(int topPlusOne){
                     
                 }
             }
+            
+            [self.delegate performSelectorOnMainThread:@selector(imageAnalyzed:) withObject:self waitUntilDone:NO];
         }
         
         
         
     }
+    
+    [pool drain];
     
     [self.delegate performSelectorOnMainThread:@selector(imageAnalyzed:) withObject:self waitUntilDone:NO];
 }
@@ -735,5 +776,82 @@ int RandomUnder(int topPlusOne){
     
     imageBytes[(row+column)*4+3] = value;
 }
+
+- (void)drawRectInBytes:(CGRect)rect withColor:(UIColor *)color{
+    [self drawRectInBytes:rect withColor:color andMarkIndex:-1];
+}
+
+- (void)drawRectInBytes:(CGRect)rect withColor:(UIColor *)color andMarkIndex:(NSInteger)index{
+    
+    NSLog(@"drawInRect:%@ index:%d", NSStringFromCGRect(rect), index);
+    
+    pixelValue redPixel = [color red]*255;
+    pixelValue greenPixel = [color green]*255;
+    pixelValue bluePixel = [color blue]*255;
+    
+    NSInteger minX = (NSInteger)rect.origin.x;
+    NSInteger maxX = (NSInteger)(rect.origin.x + rect.size.width);
+    NSInteger minY = (NSInteger)rect.origin.y;
+    NSInteger maxY = (NSInteger)(rect.origin.x + rect.size.height);
+    
+    for (int x=0; x<_width; x++) {
+        for (int y=0; y<_height; y++) {
+            if ((x>=minX && x<=maxX && y == minY) ||
+                (x>=minX && x<=maxX && y == maxY) ||
+                (x==minX && y>=minY && y<=maxY) ||
+                (x==maxX && y>=minY && y<=maxY)
+                ) {
+                [self setRedPixel:redPixel atIndexX:x andY:y];
+                [self setGreenPixel:greenPixel atIndexX:x andY:y];
+                [self setBluePixel:bluePixel atIndexX:x andY:y];
+            }
+        }
+    }
+    
+    if (index>0) {
+        CGPoint point = CGPointMake(minX+2, minY+2);
+        
+        for (int i=0; i<index; i++) {
+            [self drawPointAtPoint:point withColor:color];\
+            point.x+=4;
+        }
+    }
+    
+}
+
+-(void)drawPointAtPoint:(CGPoint)point withColor:(UIColor *)color{
+    
+    
+    NSInteger x = (NSInteger)point.x;
+    NSInteger y = (NSInteger)point.y;
+    
+    if (x<1 || x>_width-1 || y< 1 || y<_height-1 ) {
+        [self setPixelColor:color atIndexX:x-1 andY:y-1];
+        [self setPixelColor:color atIndexX:x andY:y-1];
+        [self setPixelColor:color atIndexX:x+1 andY:y-1];
+        
+        [self setPixelColor:color atIndexX:x-1 andY:y];
+        [self setPixelColor:color atIndexX:x andY:y];
+        [self setPixelColor:color atIndexX:x+1 andY:y];
+        
+        [self setPixelColor:color atIndexX:x-1 andY:y+1];
+        [self setPixelColor:color atIndexX:x andY:y+1];
+        [self setPixelColor:color atIndexX:x+1 andY:y+1];
+    }
+}
+
+- (void)setPixelColor:(UIColor *)color atIndexX:(int)x andY:(int)y{
+    pixelValue redPixel = [color red]*255;
+    pixelValue greenPixel = [color green]*255;
+    pixelValue bluePixel = [color blue]*255;
+    
+    [self setRedPixel:redPixel atIndexX:x andY:y];
+    [self setGreenPixel:greenPixel atIndexX:x andY:y];
+    [self setBluePixel:bluePixel atIndexX:x andY:y];
+    
+    
+}
+
+
 
 @end

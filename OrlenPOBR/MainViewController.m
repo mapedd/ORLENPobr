@@ -113,7 +113,7 @@
     self.picker = [[[UIImagePickerController alloc] init] autorelease];
     [self.picker setDelegate:self];
     
-    self.image.image = [UIImage imageNamed:@"orlen3.jpg"];
+    //self.image.image = [UIImage imageNamed:@"orlen4.jpg"];
     
 
 }
@@ -127,7 +127,7 @@
 }
 
 - (IBAction)grabImage {
-    /*
+    
     if (self.image.image == nil) {
         UIActionSheet *alertSheet;
         
@@ -149,9 +149,9 @@
         
         [alertSheet showInView:self.view];
     }
-     */
+     
     
-    ///self.image.image = [UIImage imageNamed:@"test2.png"];
+    //self.image.image = [UIImage imageNamed:@"orlen3.jpg"];
     
         [self showInfo:nil];
 

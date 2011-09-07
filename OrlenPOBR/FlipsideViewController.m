@@ -245,13 +245,13 @@ BOOL TKPointIsEqualToPoint(TKPoint p1, TKPoint p2){
     // and here the actual recognition takes place
     
     
-    for (int k = 0; k<1; k++) {
-        [self TKDeleteSmallObjets]; 
-    }
-    
-    for (int k = 0; k<1; k++) {
-        [self TKGrowObjets]; 
-    }
+//    for (int k = 0; k<1; k++) {
+//        [self TKDeleteSmallObjets]; 
+//    }
+//    
+//    for (int k = 0; k<1; k++) {
+//        [self TKGrowObjets]; 
+//    }
     
     //
     
@@ -321,8 +321,9 @@ BOOL TKPointIsEqualToPoint(TKPoint p1, TKPoint p2){
 
 - (void)imageAnalyzed:(TKByteImage *)byteImage{
     self.imageView.image = [byteImage currentImage];
-    [byteImage release];
-    free(mPixels);
+    
+//    [byteImage release];
+//    free(mPixels);
 }
 
 - (void)TKBurnForX:(int)x andY:(int)y{

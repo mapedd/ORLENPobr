@@ -105,4 +105,11 @@ pixelValue blueValueForIndex(int index);
 - (void)setBluePixel:(pixelValue)value atIndexX:(int)x andY:(int)y;
 - (void)setAlphaPixel:(pixelValue)value atIndexX:(int)x andY:(int)y;
 
+- (void)drawRectInBytes:(CGRect)rect withColor:(UIColor *)color;
+
+- (void)drawRectInBytes:(CGRect)rect withColor:(UIColor *)color andMarkIndex:(NSInteger)index;
+
+- (void)setPixelColor:(UIColor *)color atIndexX:(int)x andY:(int)y;
+
+- (void)drawPointAtPoint:(CGPoint)point withColor:(UIColor *)color;
 @end
