@@ -112,4 +112,6 @@ pixelValue blueValueForIndex(int index);
 - (void)setPixelColor:(UIColor *)color atIndexX:(int)x andY:(int)y;
 
 - (void)drawPointAtPoint:(CGPoint)point withColor:(UIColor *)color;
+
+- (void)drawLineFromPoint:(CGPoint)pointA toPoint:(CGPoint)pointB withColor:(UIColor *)color;
 @end

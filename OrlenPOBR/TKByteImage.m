@@ -16,6 +16,74 @@
 #define kSegment_Right	@"segmentRight"
 #define kSegment_Y		@"segmentY"
 
+#define stdev_M1_Coeff 1.5
+#define stdev_M7_Coeff 1.5
+
+/* 'hat' */
+
+#define avg_M1_HAT 0.327392
+#define stdev_M1_HAT 0.095488
+
+#define avg_M7_HAT 0.011573
+#define stdev_M7_HAT 0.0007319
+
+/* 'eye' */
+
+#define avg_M1_EYE 0.201714
+#define stdev_M1_EYE 0.048977
+
+#define avg_M7_EYE 0.066836
+#define stdev_M7_EYE 0.085184
+
+/* 'beak' */
+
+#define avg_M1_BEAK 0.369283
+#define stdev_M1_BEAK 0.04831519
+
+#define avg_M7_BEAK 0.104852
+#define stdev_M7_BEAK 0.0133614
+
+/* letter 'O' */
+
+#define avg_M1_O 0.2201827
+#define stdev_M1_O 0.011636
+
+#define avg_M7_O 0.013524
+#define stdev_M7_O 0.002767
+
+/* letter 'R' */
+
+#define avg_M1_R 0.19903775
+#define stdev_M1_R 0.00668
+
+#define avg_M7_R 0.00903
+#define stdev_M7_R 0.000208
+
+/* letter 'L' */
+
+#define avg_M1_L 0.252796
+#define stdev_M1_L 0.001852
+
+#define avg_M7_L 0.010514
+#define stdev_M7_L 0.0003787
+
+/* letter 'E' */
+
+#define avg_M1_E 0.236469
+#define stdev_M1_E 0.0018529
+
+#define avg_M7_E 0.0116323
+#define stdev_M7_E 0.0003417
+
+/* letter 'N' */
+
+#define avg_M1_N 0.207458
+#define stdev_M1_N 0.016895
+
+#define avg_M7_N 0.01039233
+#define stdev_M7_N 0.00122807
+
+
 #define TKCGPointNegative CGPointMake(-1, -1)
 
 // We allocate the memory for the image mask here, but the CGImageRef is used
@@ -624,12 +692,51 @@ int RandomUnder(int topPlusOne){
             
             M7 = (M20*M02-M11*M11)/(m00*m00*m00*m00);
             
-            NSLog(@"M1 = %f, M7 = %f, area (S=%f) index = %d",M1, M7, m00 ,i);
-            NSLog(@"minX = %d, maxX= = %d, minY = %d, maxY = %d",minX, maxX, minY, maxY);
+//            NSLog(@"M1 = %f, M7 = %f, area (S=%f) index = %d",M1, M7, m00 ,i);
+//            NSLog(@"minX = %d, maxX= = %d, minY = %d, maxY = %d",minX, maxX, minY, maxY);
             
             CGRect boundingRect = CGRectMake(minX, minY, maxX-minX, maxY-minY);
-            //CGRect boundingRect = CGRectMake(300, 264, 30, 30);
-            [self drawRectInBytes:boundingRect withColor:yellowColor andMarkIndex:-1];
+            
+            if (ABS(M1-avg_M1_O)<stdev_M1_Coeff*stdev_M1_O && ABS(M7-avg_M7_O)<stdev_M7_Coeff*stdev_M7_O) {
+                NSLog(@"letter 'O' found");
+                [self drawRectInBytes:boundingRect withColor:[UIColor redColor] andMarkIndex:1];
+            }
+            else if ((ABS(M1-avg_M1_R)<stdev_M1_Coeff*stdev_M1_R) && (ABS(M7-avg_M7_R)< stdev_M7_Coeff*stdev_M7_R)) {
+                NSLog(@"letter 'R' found");
+                [self drawRectInBytes:boundingRect withColor:[UIColor blueColor] andMarkIndex:2];
+            }
+            else if ((ABS(M1-avg_M1_L)<stdev_M1_Coeff*stdev_M1_L) && (ABS(M7-avg_M7_L)< stdev_M7_Coeff*stdev_M7_L)) {
+                NSLog(@"letter 'L' found");
+                [self drawRectInBytes:boundingRect withColor:[UIColor greenColor] andMarkIndex:3];
+            }
+            else if ((ABS(M1-avg_M1_E)<stdev_M1_Coeff*stdev_M1_E) && (ABS(M7-avg_M7_E)< stdev_M7_Coeff*stdev_M7_E)) {
+                NSLog(@"letter 'E' found");
+                [self drawRectInBytes:boundingRect withColor:[UIColor whiteColor] andMarkIndex:4];
+            }
+            else if ((ABS(M1-avg_M1_N)<stdev_M1_Coeff*stdev_M1_N) && (ABS(M7-avg_M7_N)< stdev_M7_Coeff*stdev_M7_N)) {
+                NSLog(@"letter 'N' found");
+                [self drawRectInBytes:boundingRect withColor:[UIColor cyanColor] andMarkIndex:5];
+            }
+//            else if ((ABS(M1-avg_M1_EYE)<stdev_M1_Coeff*stdev_M1_EYE) && (ABS(M7-avg_M7_EYE)< stdev_M7_Coeff*stdev_M7_EYE)) {
+//                NSLog(@"letter 'EYE' found");
+//                [self drawRectInBytes:boundingRect withColor:[UIColor cyanColor] andMarkIndex:5];
+//            }
+            else if ((ABS(M1-avg_M1_HAT)<stdev_M1_Coeff*stdev_M1_HAT) && (ABS(M7-avg_M7_HAT)< stdev_M7_Coeff*stdev_M7_HAT)) {
+                NSLog(@"letter 'HAT' found");
+                [self drawRectInBytes:boundingRect withColor:[UIColor cyanColor] andMarkIndex:5];
+            }
+            else if ((ABS(M1-avg_M1_BEAK)<stdev_M1_Coeff*stdev_M1_BEAK) && (ABS(M7-avg_M7_BEAK)< stdev_M7_Coeff*stdev_M7_BEAK)) {
+                NSLog(@"letter 'BEAK' found");
+                [self drawRectInBytes:boundingRect withColor:[UIColor cyanColor] andMarkIndex:5];
+            }
+            else{
+                [self drawRectInBytes:boundingRect withColor:yellowColor andMarkIndex:-1];
+            }
+            
+            
+            
+            [self drawLineFromPoint:CGPointMake(0, 0) toPoint:CGPointMake(600, 512) withColor:yellowColor];
+            [self drawLineFromPoint:CGPointMake(600, 0) toPoint:CGPointMake(0, 512) withColor:yellowColor];
             
             
             for (int x=0; x<_width; x++) {
@@ -782,7 +889,7 @@ int RandomUnder(int topPlusOne){
 
 - (void)drawRectInBytes:(CGRect)rect withColor:(UIColor *)color andMarkIndex:(NSInteger)index{
     
-    NSLog(@"drawInRect:%@ index:%d", NSStringFromCGRect(rect), index);
+    //NSLog(@"drawInRect:%@ index:%d", NSStringFromCGRect(rect), index);
     
     pixelValue redPixel = [color red]*255;
     pixelValue greenPixel = [color green]*255;
@@ -853,6 +960,42 @@ int RandomUnder(int topPlusOne){
     
 }
 
+- (void)drawLineFromPoint:(CGPoint)pointA toPoint:(CGPoint)pointB withColor:(UIColor *)color{
+    //y-y0 = (y1-y0)/(x1-x0)*(x-0)
+    //y = (y1-y0)/(x1-x0)*(x-x0)+y0
+    //y = a*x - a*x0 + y0
+    
+    CGFloat a = (pointB.y-pointA.y)/(pointB.x-pointA.x);
+    
+    
+    pixelValue redPixel = [color red]*255;
+    pixelValue greenPixel = [color green]*255;
+    pixelValue bluePixel = [color blue]*255;
+    
+    int minX = (int)MIN(pointA.x, pointB.x);
+    int maxX = (int)MAX(pointA.x, pointB.x);
+    int minY = (int)MIN(pointA.y, pointB.y);
+    int maxY = (int)MAX(pointA.y, pointB.y);
+    
+    
+    int leftSide = 0;
+    int yInt  = 0;
+    
+    for (int x=minX; x<=maxX; x++) {
+        for (int y=minY; y<=maxY; y++) {
+            
+            leftSide = a*x-a*pointA.x+pointA.y;
+            yInt = (int)y;
+            
+            if (yInt == leftSide) {
+                [self setRedPixel:redPixel atIndexX:x andY:y];
+                [self setGreenPixel:greenPixel atIndexX:x andY:y];
+                [self setBluePixel:bluePixel atIndexX:x andY:y];
+            }
+        }
+    }
+    
+}
 
 
 @end
