@@ -628,10 +628,9 @@ int RandomUnder(int topPlusOne){
             NSLog(@"minX = %d, maxX= = %d, minY = %d, maxY = %d",minX, maxX, minY, maxY);
             
             CGRect boundingRect = CGRectMake(minX, minY, maxX-minX, maxY-minY);
-//            CGRect boundingRect = CGRectMake(10, 10, 200, 200);
+            //CGRect boundingRect = CGRectMake(300, 264, 30, 30);
+            [self drawRectInBytes:boundingRect withColor:yellowColor andMarkIndex:-1];
             
-//            [self drawRectInBytes:boundingRect withColor:yellowColor];
-            [self drawRectInBytes:boundingRect withColor:yellowColor andMarkIndex:i];
             
             for (int x=0; x<_width; x++) {
                 for (int y=0; y<_height; y++) {
@@ -789,10 +788,12 @@ int RandomUnder(int topPlusOne){
     pixelValue greenPixel = [color green]*255;
     pixelValue bluePixel = [color blue]*255;
     
-    NSInteger minX = (NSInteger)rect.origin.x;
-    NSInteger maxX = (NSInteger)(rect.origin.x + rect.size.width);
-    NSInteger minY = (NSInteger)rect.origin.y;
-    NSInteger maxY = (NSInteger)(rect.origin.x + rect.size.height);
+    int minX = (int)rect.origin.x;
+    int maxX = (int)(rect.origin.x + rect.size.width);
+    int minY = (int)rect.origin.y;
+    int maxY = (int)(rect.origin.y + rect.size.height);
+    
+    
     
     for (int x=0; x<_width; x++) {
         for (int y=0; y<_height; y++) {
