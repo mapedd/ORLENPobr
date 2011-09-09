@@ -54,6 +54,9 @@ pixelValue blueValueForIndex(int index);
     unsigned char wantedRed;
     unsigned char wantedGreen;
     unsigned char wantedBlue;
+    
+    
+    CGRect oRect, rRect, lRect, eRect, nRect, eyeRect, hatRect, beakRect;
 }
 
 @property (nonatomic, readonly) int width;

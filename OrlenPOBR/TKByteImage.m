@@ -700,22 +700,27 @@ int RandomUnder(int topPlusOne){
             if (ABS(M1-avg_M1_O)<stdev_M1_Coeff*stdev_M1_O && ABS(M7-avg_M7_O)<stdev_M7_Coeff*stdev_M7_O) {
                 NSLog(@"letter 'O' found");
                 [self drawRectInBytes:boundingRect withColor:[UIColor redColor] andMarkIndex:1];
+                oRect = boundingRect;
             }
             else if ((ABS(M1-avg_M1_R)<stdev_M1_Coeff*stdev_M1_R) && (ABS(M7-avg_M7_R)< stdev_M7_Coeff*stdev_M7_R)) {
                 NSLog(@"letter 'R' found");
                 [self drawRectInBytes:boundingRect withColor:[UIColor blueColor] andMarkIndex:2];
+                rRect = boundingRect;
             }
             else if ((ABS(M1-avg_M1_L)<stdev_M1_Coeff*stdev_M1_L) && (ABS(M7-avg_M7_L)< stdev_M7_Coeff*stdev_M7_L)) {
                 NSLog(@"letter 'L' found");
                 [self drawRectInBytes:boundingRect withColor:[UIColor greenColor] andMarkIndex:3];
+                lRect = boundingRect;
             }
             else if ((ABS(M1-avg_M1_E)<stdev_M1_Coeff*stdev_M1_E) && (ABS(M7-avg_M7_E)< stdev_M7_Coeff*stdev_M7_E)) {
                 NSLog(@"letter 'E' found");
                 [self drawRectInBytes:boundingRect withColor:[UIColor whiteColor] andMarkIndex:4];
+                eRect = boundingRect;
             }
             else if ((ABS(M1-avg_M1_N)<stdev_M1_Coeff*stdev_M1_N) && (ABS(M7-avg_M7_N)< stdev_M7_Coeff*stdev_M7_N)) {
                 NSLog(@"letter 'N' found");
                 [self drawRectInBytes:boundingRect withColor:[UIColor cyanColor] andMarkIndex:5];
+                nRect = boundingRect;
             }
 //            else if ((ABS(M1-avg_M1_EYE)<stdev_M1_Coeff*stdev_M1_EYE) && (ABS(M7-avg_M7_EYE)< stdev_M7_Coeff*stdev_M7_EYE)) {
 //                NSLog(@"letter 'EYE' found");
@@ -724,19 +729,31 @@ int RandomUnder(int topPlusOne){
             else if ((ABS(M1-avg_M1_HAT)<stdev_M1_Coeff*stdev_M1_HAT) && (ABS(M7-avg_M7_HAT)< stdev_M7_Coeff*stdev_M7_HAT)) {
                 NSLog(@"letter 'HAT' found");
                 [self drawRectInBytes:boundingRect withColor:[UIColor cyanColor] andMarkIndex:5];
+                hatRect = boundingRect;
             }
             else if ((ABS(M1-avg_M1_BEAK)<stdev_M1_Coeff*stdev_M1_BEAK) && (ABS(M7-avg_M7_BEAK)< stdev_M7_Coeff*stdev_M7_BEAK)) {
                 NSLog(@"letter 'BEAK' found");
                 [self drawRectInBytes:boundingRect withColor:[UIColor cyanColor] andMarkIndex:5];
+                beakRect = boundingRect;
             }
             else{
                 [self drawRectInBytes:boundingRect withColor:yellowColor andMarkIndex:-1];
             }
             
             
+            if (!CGRectIsEmpty(oRect) && !CGRectIsEmpty(rRect) && !CGRectIsEmpty(hatRect)) {
+                NSLog(@"o r hat found");
+                [self drawLineFromPoint:CGRectCenter(oRect) toPoint:CGRectCenter(rRect) withColor:yellowColor];
+                [self drawLineFromPoint:CGRectCenter(rRect) toPoint:CGRectCenter(hatRect) withColor:yellowColor];
+                [self drawLineFromPoint:CGRectCenter(hatRect) toPoint:CGRectCenter(oRect) withColor:yellowColor];
+            }
+            else{
+                NSLog(@"o r hat not found");
+            }
             
-            [self drawLineFromPoint:CGPointMake(0, 0) toPoint:CGPointMake(600, 512) withColor:yellowColor];
-            [self drawLineFromPoint:CGPointMake(600, 0) toPoint:CGPointMake(0, 512) withColor:yellowColor];
+            
+            //[self drawLineFromPoint:CGPointMake(0, 0) toPoint:CGPointMake(600, 512) withColor:yellowColor];
+            //[self drawLineFromPoint:CGPointMake(600, 0) toPoint:CGPointMake(0, 512) withColor:yellowColor];
             
             
             for (int x=0; x<_width; x++) {
@@ -927,7 +944,7 @@ int RandomUnder(int topPlusOne){
     
 }
 
--(void)drawPointAtPoint:(CGPoint)point withColor:(UIColor *)color{
+- (void)drawPointAtPoint:(CGPoint)point withColor:(UIColor *)color{
     
     
     NSInteger x = (NSInteger)point.x;
