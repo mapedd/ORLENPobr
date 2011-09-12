@@ -1,0 +1,12 @@
+ORLENPobr for iOS
+
+This project was made for faculty project at my university (Warsaw University of Technology, Politechnika Warszawska). 
+Course name was Image Computing (Przetwarzanie Obrazów - POBR).
+
+Subject was to recognise the logo of polish company Orlen.
+
+App can take a picture from library or capture it from camera. 
+
+It's version which i've showed to a teacher, it's not very complete, but works.
+
+Interesting fact is it implements Flood Fill algorithm, it was rewritten for iOS from OSX version of "Paintbrush"
